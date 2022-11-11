@@ -1,0 +1,10 @@
+import initialState from './initialState';
+
+const changeState = (state=initialState, action) => {
+    switch(action.type){
+        default:
+            return state;
+    }
+}
+
+export default changeState;
