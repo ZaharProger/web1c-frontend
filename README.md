@@ -51,16 +51,16 @@
 
 ## Что нужно сделать и знать перед работой
 После клонирования репозитория нужно поставить все основные React зависимости:\
-npm install react\
-npm install react-scripts\
-npm install react-dom\
-npm install react-router-dom\
-npm install react-redux\
-npm install @reduxjs/toolkit\
-npm install @testing-library/jest-dom\
-npm install @testing-library/react\
-npm install @testing-library/user-event\
-npm install web-vitals\
+**npm install react**\
+**npm install react-scripts**\
+**npm install react-dom**\
+**npm install react-router-dom**\
+**npm install react-redux**\
+**npm install @reduxjs/toolkit**\
+**npm install @testing-library/jest-dom**\
+**npm install @testing-library/react**\
+**npm install @testing-library/user-event**\
+**npm install web-vitals**\
 Вообще, в package.json есть массив dependencies. Там указаны все зависимости с версиями, которые должны стоять.\
 Если совсем возникнут сложности, напиши мне в телегу, я скину в беседу node_modules, просто перемести папку в склонированный проект.
 
