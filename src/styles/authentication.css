@@ -1,38 +1,29 @@
-form {
+#Authentication {
     margin: auto;
-    max-width: 500px;
+    width: 400px;
+    background-color: #212529;
+    border-radius: 8em 2em 8em 2em;
+    overflow: hidden;
 }
 .logo {
     padding: 15px 25%;
     background-color: #FD9330;
-    border-top-left-radius: 8em;
-    border-top-right-radius: 2em;
-}
-.info {
-    padding: 0px 11%;
-    padding-top: 100px;
-    background-color: #212529;
-    border-bottom-right-radius: 8em;
-    border-bottom-left-radius: 2em;
 }
 .info input {
-    width: 100%;
-    margin: 30px auto;
+    margin: 0 20px 40px 20px;
     font-size: 21px;
-    padding: 10px;
     border-radius: 1em;
     border: 1px solid white;
-    border-bottom: 5px solid transparent;
+    border-bottom: 5px solid;
+    border-bottom-color: transparent;
 }
 .info input:focus {
     outline: 0;
     outline-offset: 0;
-    border: 1px solid #FD9330;
-    border-bottom: 5px solid #FD9330;
+    border-color: #FD9330;
 }
 .info button {
-    margin: 40px auto;
-    margin-top: 120px;
+    margin: 60px auto;
     padding: 10px 80px;
     border: 2px solid #FD9330;
     border-radius: 2em;
