@@ -1,0 +1,16 @@
+.input-placeholder::placeholder{
+    color: #212529;
+    opacity: 0.45;
+}
+.input-placeholder::-moz-placeholder{
+    color: #212529;
+    opacity: 0.45;
+}
+.input-placeholder::-webkit-input-placeholder{
+    color: #212529;
+    opacity: 0.45;
+}
+
+/*
+Это классы для плейсхолдеров, чтобы они были чуть прозрачнее вписываемого текста
+*/

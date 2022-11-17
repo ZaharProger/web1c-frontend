@@ -25,6 +25,7 @@ form {
     padding: 10px;
     border-radius: 1em;
     border: 1px solid white;
+    border-bottom: 5px solid transparent;
 }
 .info input:focus {
     outline: 0;
@@ -40,7 +41,7 @@ form {
     border-radius: 2em;
     font-size: 27px;
     color: #FD9330;
-    background-color: rgba(28,28,28,0);
+    background-color: transparent;
     transition: 0.3s;
 }
 .info button:hover {

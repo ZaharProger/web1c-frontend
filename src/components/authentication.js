@@ -1,6 +1,6 @@
 import "../styles/authentication.css";
 import companyLogo from '../pics/enplus_2005.svg';
-export function Authentication(props) {
+export default function Authentication() {
     return (
         <form>
             <div className="col">
@@ -9,8 +9,8 @@ export function Authentication(props) {
                 </div>
                 <div className="row info">
                     <div className="col d-flex flex-column justify-content-evenly">
-                        <input type="text" placeholder="Логин"></input>
-                        <input type="password" placeholder="Пароль"></input>
+                        <input className="input-placeholder" type="text" placeholder="Логин" autoComplete="off"></input>
+                        <input className="input-placeholder" type="password" placeholder="Пароль" autoComplete="off"></input>
                         <button type="submit">Войти</button>
                     </div>
                 </div>
