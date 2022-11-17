@@ -4,6 +4,7 @@ import Authentication from './authentication';
 import ProtectedRoutes from './protectedRoutes';
 import { routes } from '../globalConstants';
 import '../styles/placeholder.css';
+import '../styles/body.css'
 
 export default function App(){
     return(

@@ -1,26 +1,23 @@
 form {
-    width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
+    margin: auto;
+    max-width: 500px;
 }
 .logo {
-    padding: 0px 25%;
-    height: 200px;
+    padding: 15px 25%;
     background-color: #FD9330;
     border-top-left-radius: 8em;
     border-top-right-radius: 2em;
 }
 .info {
-    justify-content: center;
     padding: 0px 11%;
-    padding-top: 60px;
+    padding-top: 100px;
     background-color: #212529;
-    height: 550px;
     border-bottom-right-radius: 8em;
     border-bottom-left-radius: 2em;
 }
 .info input {
+    width: 100%;
+    margin: 30px auto;
     font-size: 21px;
     padding: 10px;
     border-radius: 1em;
@@ -34,9 +31,9 @@ form {
     border-bottom: 5px solid #FD9330;
 }
 .info button {
-    margin: 0px 70px;
-    margin-top: 80px;
-    padding: 10px;
+    margin: 40px auto;
+    margin-top: 120px;
+    padding: 10px 80px;
     border: 2px solid #FD9330;
     border-radius: 2em;
     font-size: 27px;

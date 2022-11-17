@@ -8,7 +8,7 @@ export default function Authentication() {
                     <img src={companyLogo}></img>
                 </div>
                 <div className="row info">
-                    <div className="col d-flex flex-column justify-content-evenly">
+                    <div className="col d-flex flex-column">
                         <input className="input-placeholder" type="text" placeholder="Логин" autoComplete="off"></input>
                         <input className="input-placeholder" type="password" placeholder="Пароль" autoComplete="off"></input>
                         <button type="submit">Войти</button>
