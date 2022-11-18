@@ -15,7 +15,7 @@ export default function App(){
                     {/* <Route path={ routes.main } element={ <Content /> } /> */}
                     <Route path={ routes.auth } element={ <Authentication /> } />
                 </Route>
-                {/* <Route path={ routes.not_found } element={ <NotFoundPage /> } /> */}
+                {/* <Route path={ routes.notFound } element={ <NotFoundPage /> } /> */}
             </Routes>
         </div>
     )

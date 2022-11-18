@@ -20,20 +20,20 @@ export default function useValidation(){
         }
 
         return {
-            error_message: errorMessage,
-            error_inputs: errorInputs
+            message: errorMessage,
+            inputs: errorInputs
         }
     }
 
     //Осуществление валидации по заданному кейсу. По ключу кейса подбираются предикат и сообщение в случае непрохождения проверки
     function performValidation(formInputs, validationCase){
-        return checkCase(formInputs, validationCase.predicate, validationCase.message_if_error);
+        return checkCase(formInputs, validationCase.predicate, validationCase.messageIfError);
     }
 
 
     //Хук возвращает две функции: валидацию по кейсу и обновление инпутов
     return {
-        perform_validation: performValidation,
-        update_inputs: updateInputs
+        validate: performValidation,
+        update: updateInputs
     }
 }

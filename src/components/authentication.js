@@ -6,7 +6,7 @@ import useValidation from '../hooks/useValidation';
 import { validationCases } from "../globalConstants";
 
 export default function Authentication() {
-    const { perform_validation: validate, update_inputs: updateInputs } = useValidation();
+    const { validate, update } = useValidation();
     useEffect(() => {
         const authForm = document.getElementById('Authentication');
         authForm.onsubmit = async (e) => {
@@ -14,10 +14,10 @@ export default function Authentication() {
 
             const formInputs = Array.from(authForm.getElementsByTagName('input'));
             const validationResults = [];
-            validationResults.push(validate(formInputs, validationCases.empty_fields));
+            validationResults.push(validate(formInputs, validationCases.emptyFields));
 
-            const firstFailedCase = validationResults.find(validationResult => validationResult.error_message != '');
-            updateInputs(formInputs, firstFailedCase !== undefined? firstFailedCase.error_inputs : []);
+            const firstFailedCase = validationResults.find(validationResult => validationResult.message != '');
+            update(formInputs, firstFailedCase !== undefined? firstFailedCase.inputs : []);
 
             if (firstFailedCase !== undefined){
                 // Тут обращение к бекенду
