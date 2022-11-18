@@ -11,7 +11,7 @@ export const validationCases = {
         messageIfError: 'Заполните все поля!'
     },
     passwordMismatch: {
-        predicate: (input, firstInput) => input.value != firstInput.value && input.type == 'password',
+        predicate: (input, firstInput) => input.value != firstInput.value,
         messageIfError: 'Пароли не совпадают!'
     }
 }
