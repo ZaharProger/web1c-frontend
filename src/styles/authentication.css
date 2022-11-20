@@ -1,13 +1,12 @@
 #Authentication {
     margin: auto;
     width: 400px;
-    background-color: #212529;
-    border-radius: 8em 2em 8em 2em;
-    overflow: hidden;
 }
 .logo {
     padding: 15px 25%;
+    margin-bottom: 30px;
     background-color: #FD9330;
+    border-radius: 8em 2em 8em 2em;
 }
 .info input {
     margin: 0 20px 40px 20px;
