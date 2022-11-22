@@ -1,0 +1,21 @@
+.modal {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    pointer-events: all;
+    transition: 0.3s;
+    top: -999px;
+}
+
+.modal.active {
+    top: 0;
+}
+
+.modal__content {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background-color: red;
+    color: white;
+    font-size: 18px;
+}
