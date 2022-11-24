@@ -1,11 +1,13 @@
 import React from "react";
 import "../styles/modal.css";
 
-const Modal = ({ active, setActive, children }) => {
+const Modal = (props) => {
     return (
-        <div className={active ? "modal active" : "modal"} onClick={() => setActive(false)}>
-            <div className="modal__content" onClick={e => e.stopPropagation()}>
-                {children}
+        <div id="Modal" className="modal-active">
+            <div className="modal__content">
+                {
+                    props.message
+                }
             </div>
         </div>
     )
