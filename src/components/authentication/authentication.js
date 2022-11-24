@@ -4,7 +4,7 @@ import companyLogo from '../../pics/enplus_2005.svg';
 export default function Authentication() {
     return (
         <form id="Authentication" className="d-flex flex-column">
-            <div className="logo">
+            <div className="logo d-flex me-auto ms-auto">
                 <img src={companyLogo}></img>
             </div>
             <div className="info d-flex flex-column pt-5 pe-2 ps-2">
