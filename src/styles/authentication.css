@@ -23,7 +23,8 @@
     border-color: #FD9330;
 }
 .info button {
-    margin: 60px auto;
+    margin: 0px auto;
+    margin-top: 60px;
     padding: 10px 80px;
     border: 2px solid #FD9330;
     border-radius: 2em;
@@ -35,4 +36,24 @@
 .info button:hover {
     color: #212529;
     background-color: #FD9330;
+}
+
+@media screen and (max-width: 500px) {
+    .logo {
+        border-radius: 7em 1.5em 7em 1.5em;
+    }
+    .info input {
+        border-radius: 0.7em;
+    }
+    .info button {
+        border-radius: 1em;
+    }
+}
+@media screen and (max-height: 650px) {
+    .info button {
+        margin-top: 15px;
+    }
+    .logo {
+        margin-bottom: 10px;
+    }
 }
