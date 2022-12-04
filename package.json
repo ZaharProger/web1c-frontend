@@ -1,6 +1,7 @@
 {
   "name": "web1c-frontend",
   "version": "0.1.0",
+  "proxy": "https://localhost:7148",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.0",

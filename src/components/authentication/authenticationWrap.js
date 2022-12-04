@@ -4,10 +4,12 @@ import Authentication from './authentication';
 import Modal from '../modal';
 import useRedirection from '../../hooks/useRedirection';
 import useValidation from '../../hooks/useValidation';
-import { validationCases, routes } from '../../globalConstants';
+import useApi from '../../hooks/useApi';
+import { VALIDATION_CASES, ROUTES, API, SERVER_ERROR_MESSAGE, AWAIT_BUTTON_TEXT } from '../../globalConstants';
 
 export default function AuthenticationWrap() {
     const redirect = useRedirection();
+    const performApiCall = useApi();
     const { validate, update } = useValidation();
     const [modalActive, setModalActive] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -15,6 +17,7 @@ export default function AuthenticationWrap() {
     useEffect(() => {
         const authForm = document.getElementById('Authentication');
         const formInputs = Array.from(authForm.getElementsByTagName('input'));
+        const formButton = authForm.querySelector('button');
 
         formInputs.forEach(input => {
             input.oninput = () => {
@@ -31,19 +34,40 @@ export default function AuthenticationWrap() {
             e.preventDefault();
 
             const validationResults = [];
-            validationResults.push(validate(formInputs, validationCases.emptyFields));
-            validationResults.push(validate(formInputs, validationCases.extraSymbols));
-
+            validationResults.push(validate(formInputs, VALIDATION_CASES.emptyFields));
+            validationResults.push(validate(formInputs, VALIDATION_CASES.extraSymbols));
             const firstFailedCase = validationResults.find(validationResult => validationResult.message != '');
-            update(formInputs, firstFailedCase !== undefined ? firstFailedCase.inputs : []);
-   
+            
+            let message;
+            let isModalActive;
+            let errorInputs;
+            const prevCaption = formButton.innerText;
+            formButton.innerText = AWAIT_BUTTON_TEXT;
+
             if (firstFailedCase === undefined) {
-                // Тут обращение к бекенду
-                redirect(routes.main);
+                const formData = new FormData(authForm);
+                formData.append(API.params.request_type, 0);
+                
+                const { ok, data } = await performApiCall(API.endpoints.users, API.methods.post, formData);
+                message = ok? data.message : SERVER_ERROR_MESSAGE;
+                isModalActive = ok? !data.result : true;    
+                errorInputs = ok? Array.from(document.getElementsByName(data.incorrectFieldType)) : [];              
+            }
+            else{             
+                message = firstFailedCase.message;
+                isModalActive = true;  
+                errorInputs = firstFailedCase.inputs;             
+            }
+
+            formButton.innerText = prevCaption;
+            update(formInputs, errorInputs);
+
+            if (isModalActive){
+                setErrorMessage(message);
+                setModalActive(isModalActive);
             }
             else{
-                setErrorMessage(firstFailedCase.message);
-                setModalActive(true);
+                redirect(ROUTES.main);
             }
         }
     }, [modalActive])
