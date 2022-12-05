@@ -34,7 +34,8 @@ export const API = {
         users: '/api/Users'
     },
     params: {
-        requestType: 'requestType'
+        requestType: 'requestType',
+        type: 'type'
     }
 }
 

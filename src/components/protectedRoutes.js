@@ -30,11 +30,11 @@ export default function ProtectedRoutes() {
 
         if (requiredRoutes.includes(location.pathname)){
             async function getProfileData(){
-                const { ok, responseBody } = await performApiCall(API.endpoints.users, API.methods.get);
-
-                const isEverythingOk = ok? responseBody.result : false;
-                if (isEverythingOk){
-                    updateProfileData(responseBody.data[0]);
+                const requestString = `${API.endpoints.users}?${API.params.type}=2`;
+                const { ok, responseBody } = await performApiCall(requestString, API.methods.get);
+                
+                if (ok){
+                    updateProfileData(responseBody.result? responseBody.data[0] : null);
                 }
                 else{
                     updateModalInfo({
