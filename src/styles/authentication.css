@@ -39,6 +39,9 @@
 }
 
 @media screen and (max-width: 500px) {
+    #AuthenticationWrap {
+        width: 350px;
+    }
     .logo {
         border-radius: 7em 1.5em 7em 1.5em;
     }
@@ -47,6 +50,20 @@
     }
     .info button {
         border-radius: 1em;
+        padding: 10px 60px;
+    }
+}
+@media screen and (max-width: 350px) {
+    #AuthenticationWrap {
+        width: 280px;
+    }
+    .info input {
+        font-size: 18px;
+    }
+    .info button {
+        margin-top: 25px;
+        font-size: 23px;
+        padding: 10px 40px;
     }
 }
 @media screen and (max-height: 650px) {
