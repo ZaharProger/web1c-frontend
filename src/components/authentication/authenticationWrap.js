@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import Authentication from './authentication';
-import Modal from '../modal';
 import useRedirection from '../../hooks/useRedirection';
 import useValidation from '../../hooks/useValidation';
 import useApi from '../../hooks/useApi';
+import useRedux from '../../hooks/useRedux';
 import { VALIDATION_CASES, ROUTES, API, SERVER_ERROR_MESSAGE, AWAIT_BUTTON_TEXT } from '../../globalConstants';
+import { MODAL_STATE } from '../../state-manager/stateConstants';
 
 export default function AuthenticationWrap() {
     const redirect = useRedirection();
     const performApiCall = useApi();
     const { validate, update } = useValidation();
-    const [modalActive, setModalActive] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+    const updateModalInfo = useRedux(MODAL_STATE);
 
     useEffect(() => {
         const authForm = document.getElementById('Authentication');
@@ -24,9 +24,10 @@ export default function AuthenticationWrap() {
                 update(formInputs, Array.from(document.getElementsByClassName('incorrect'))
                     .filter(errorInput => errorInput !== input));
 
-                if (modalActive){
-                    setTimeout(() => setModalActive(false), 300);
-                }
+                setTimeout(() => updateModalInfo({
+                    isActive: false,
+                    message: ''
+                }), 300);
             }
         });
 
@@ -46,12 +47,12 @@ export default function AuthenticationWrap() {
 
             if (firstFailedCase === undefined) {
                 const formData = new FormData(authForm);
-                formData.append(API.params.request_type, 0);
+                formData.append(API.params.requestType, 0);
                 
-                const { ok, data } = await performApiCall(API.endpoints.users, API.methods.post, formData);
-                message = ok? data.message : SERVER_ERROR_MESSAGE;
-                isModalActive = ok? !data.result : true;    
-                errorInputs = ok? Array.from(document.getElementsByName(data.incorrectFieldType)) : [];              
+                const { ok, responseBody } = await performApiCall(API.endpoints.users, API.methods.post, formData);
+                message = ok? responseBody.message : SERVER_ERROR_MESSAGE;
+                isModalActive = ok? !responseBody.result : true;    
+                errorInputs = ok? Array.from(document.getElementsByName(responseBody.incorrectFieldType)) : [];              
             }
             else{             
                 message = firstFailedCase.message;
@@ -63,20 +64,19 @@ export default function AuthenticationWrap() {
             update(formInputs, errorInputs);
 
             if (isModalActive){
-                setErrorMessage(message);
-                setModalActive(isModalActive);
+                updateModalInfo({
+                    isActive: isModalActive,
+                    message: message
+                });
             }
             else{
                 redirect(ROUTES.main);
             }
         }
-    }, [modalActive])
+    }, [])
 
     return(
-        <div id="AuthenticationWrap" className="d-flex flex-column">
-            {
-                modalActive? <Modal message={ errorMessage } /> : null
-            }
+        <div id="AuthenticationWrap" className="d-flex flex-column">         
             <Authentication />
         </div>
     )

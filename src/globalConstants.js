@@ -4,6 +4,10 @@ export const ROUTES = {
     notFound: '/*'
 }
 
+export const LOCAL_STORAGE_KEYS = {
+    isLogged: 'isLogged'
+}
+
 export const VALIDATION_CASES = {
     emptyFields: {
         predicate: (input) => input.value == '',
@@ -30,10 +34,10 @@ export const API = {
         users: '/api/Users'
     },
     params: {
-        request_type: 'requestType'
+        requestType: 'requestType'
     }
 }
 
-export const SERVER_ERROR_MESSAGE = 'Ошибка сервера';
+export const SERVER_ERROR_MESSAGE = 'Ошибка сервера или отсутствие подключения к Интернету';
 
 export const AWAIT_BUTTON_TEXT = 'Подождите...';
