@@ -1,9 +1,8 @@
 import { useDispatch } from 'react-redux';
-import { useCallback } from 'react';
 
 import changeProfileData from '../state-manager/actions/changeProfileData';
 import changeModalState from '../state-manager/actions/changeModalState';
-import { PROFILE_DATA, MODAL_STATE } from '../state-manager/stateConstants';
+import {PROFILE_DATA, MODAL_STATE} from '../state-manager/stateConstants';
 
 export default function useRedux(reduxAction){
     const dispatch = useDispatch();
@@ -20,7 +19,5 @@ export default function useRedux(reduxAction){
             break;
     }
 
-    //Оборачиваем полученный callback в хук UseCallback для того, чтобы кэшировать функцию.
-    //Возвращаем окончательный callback как результат работы хука.
-    return useCallback(callback, []);
+    return callback
 }

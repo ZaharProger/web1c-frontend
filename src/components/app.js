@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import Content from './content';
-import Error404 from './error404';
-import Modal from './modal';
+import Content from './content/content';
+import Error404 from './error/error404';
+import Modal from './modal/modal';
 import AuthenticationWrap from './authentication/authenticationWrap';
 import ProtectedRoutes from './protectedRoutes';
 import { ROUTES } from '../globalConstants';

@@ -1,4 +1,4 @@
-import boom from '../pics/boom.png';
+import boom from '../../pics/boom.png';
 
 export default function Error404() {
     return (
