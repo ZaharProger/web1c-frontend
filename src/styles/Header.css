@@ -1,7 +1,8 @@
-Header {
+#Header {
     padding: 10px;
     position: fixed;
     top: 0;
+    background-color: #212529;
 }
 
 .logo-nav {
@@ -51,7 +52,7 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
 
 .Submenu {
     position: fixed;
-    background-color: transparent;
+    background-color: #212529;
     border: 2px solid #FD9330;
     border-radius: 10px;
     opacity: 0;

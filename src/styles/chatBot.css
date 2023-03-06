@@ -1,0 +1,52 @@
+#ChatBot {
+    position: fixed;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    right: 25px;
+    bottom: 100px;
+    width: 400px;
+    height: 600px;
+
+    z-index: 10001;
+
+    border: 1px solid #FD9330;
+    border-radius: 2em;
+    color: #FD9330;
+    background-color: #212529;
+    opacity: .99;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+#ChatBot::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+.chat__close {
+    padding-right: 20px;
+    text-align: right;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.write {
+    margin-bottom: 20px;
+    padding-right: 120px;
+}
+
+.chat__send {
+    cursor: pointer;
+    font-family: FontAwesome;
+    font-size: 1.7rem;
+}
+
+.open {
+    display: flex;
+}
+
+.close {
+    display: none;
+}
