@@ -1,5 +1,5 @@
 import initialState from './initialState';
-import { PROFILE_DATA, MODAL_STATE } from './stateConstants';
+import {PROFILE_DATA, MODAL_STATE, SUBMENU_STATE} from './stateConstants';
 
 const changeState = (state=initialState, action) => {
     switch(action.type){
@@ -12,6 +12,11 @@ const changeState = (state=initialState, action) => {
             return {
                 ...state,
                 modalState: action.modalState
+            }
+        case SUBMENU_STATE:
+            return {
+                ...state,
+                subMenuState: action.subMenuState
             }
         default:
             return state;

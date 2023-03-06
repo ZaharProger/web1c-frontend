@@ -3,6 +3,7 @@ const initialState = {
         isActive: false,
         message: ''
     },
+    subMenuState: null,
     profileData: null
 }
 

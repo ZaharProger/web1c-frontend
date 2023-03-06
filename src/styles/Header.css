@@ -31,20 +31,47 @@ input:focus::-moz-placeholder          {opacity: 0; transition: opacity 0.3s eas
 input:focus:-moz-placeholder           {opacity: 0; transition: opacity 0.3s ease;}
 input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s ease;}
 
-.navbar-list-item > span, .sign-out-item > span {
+.Navbar-list-item > span, .Submenu-item > span {
     cursor: pointer;
     color: white;
     transition: 0.3s ease-out;
 }
 
-.navbar-list-item > span {
+.Submenu-item > span:hover {
+    color: #FD9330;
+}
+
+.Navbar-list-item {
     margin-right: 35px;
 }
 
-.sign-out-item > span {
+.sign-out-item {
     margin-left: 100px;
 }
 
-.navbar-list-item > span:hover, .sign-out-item > span:hover {
-    color: #FD9330;
+.Submenu {
+    position: fixed;
+    background-color: transparent;
+    border: 2px solid #FD9330;
+    border-radius: 10px;
+    opacity: 0;
+    animation: submenu-reveal 0.45s ease-out 0s 1 forwards;
+}
+
+@keyframes submenu-reveal {
+    from {
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.Submenu-item {
+    margin-bottom: 8px;
+}
+
+.Submenu-item:last-child {
+    margin-bottom: 0;
 }
