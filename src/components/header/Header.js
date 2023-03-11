@@ -5,7 +5,7 @@ import HeaderNavbar from "./HeaderNavbar";
 
 const Header = () => {
     return (
-        <div id="Header" className="d-flex flex-row p-2 w-100">
+        <div id="Header" className="d-flex flex-row pt-2 pe-2 ps-2 pb-5 w-100">
             <HeaderLogo />
             <HeaderNavbar />
         </div>

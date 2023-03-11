@@ -1,3 +1,4 @@
 export const PROFILE_DATA = 'PROFILE_DATA';
 export const MODAL_STATE = 'MODAL_STATE';
 export const SUBMENU_STATE = 'SUBMENU_STATE';
+export const CHATBOT_STATE = 'CHATBOT_STATE';

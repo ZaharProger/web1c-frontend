@@ -3,7 +3,8 @@ const initialState = {
         isActive: false,
         message: ''
     },
-    subMenuState: null,
+    subMenuState: false,
+    chatBotState: false,
     profileData: null
 }
 

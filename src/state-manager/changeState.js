@@ -1,5 +1,5 @@
 import initialState from './initialState';
-import {PROFILE_DATA, MODAL_STATE, SUBMENU_STATE} from './stateConstants';
+import {PROFILE_DATA, MODAL_STATE, SUBMENU_STATE, CHATBOT_STATE} from './stateConstants';
 
 const changeState = (state=initialState, action) => {
     switch(action.type){
@@ -17,6 +17,11 @@ const changeState = (state=initialState, action) => {
             return {
                 ...state,
                 subMenuState: action.subMenuState
+            }
+        case CHATBOT_STATE:
+            return {
+                ...state,
+                chatBotState: action.chatBotState
             }
         default:
             return state;

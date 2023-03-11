@@ -17,7 +17,7 @@ export default function ProtectedRoutes() {
     localStorage.getItem(LOCAL_STORAGE_KEYS.isLogged) === '1';
     localStorage.removeItem(LOCAL_STORAGE_KEYS.isLogged);
 
-    const isLocationAuth = location.pathname == ROUTES.auth;
+    const isLocationAuth = location.pathname === ROUTES.auth;
     const requiredRoutes = [ROUTES.main];
 
     window.onbeforeunload = () => {

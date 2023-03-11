@@ -1,46 +1,46 @@
 #ChatBot {
     position: fixed;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
-
-    right: 25px;
-    bottom: 100px;
-    width: 400px;
-    height: 600px;
-
-    z-index: 10001;
-
+    height: 80vh;
+    width: 340px;
     border: 1px solid #FD9330;
     border-radius: 2em;
     color: #FD9330;
     background-color: #212529;
-    opacity: .99;
-    overflow-y: scroll;
-    scrollbar-width: none;
+    opacity: 0;
+    overflow-y: auto;
+    inset-block: auto 5vmin;
+    inset-inline: auto 5vmin;
+    animation: chatbot-reveal 0.3s ease-out 0s 1 forwards;
 }
 
-#ChatBot::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
+@keyframes chatbot-reveal {
+    from {
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 0.99;
+        transform: translateX(0);
+    }
 }
 
-.chat__close {
-    padding-right: 20px;
-    text-align: right;
-    font-size: 40px;
+#ChatBot::-webkit-scrollbar{
+    width: 2px;
+    height: 1px;
+    background-color: transparent;
+}
+
+#ChatBot::-webkit-scrollbar-thumb{
+    background-color: #FD9330;
+}
+
+#ChatBot::-webkit-scrollbar-corner{
+    background-color: transparent;
+}
+
+#chat-send, #chat-close {
     cursor: pointer;
-}
-
-.write {
-    margin-bottom: 20px;
-    padding-right: 120px;
-}
-
-.chat__send {
-    cursor: pointer;
-    font-family: FontAwesome;
-    font-size: 1.7rem;
+    font-size: 1.8em;
+    color: #FD9330;
 }
 
 .open {

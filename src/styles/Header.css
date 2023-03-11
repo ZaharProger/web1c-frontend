@@ -1,8 +1,24 @@
 #Header {
-    padding: 10px;
     position: fixed;
-    top: 0;
-    background-color: #212529;
+    background: linear-gradient(#212529 60%, transparent);
+}
+
+#Header-navbar {
+    overflow-x: auto;
+}
+
+#Header-navbar::-webkit-scrollbar{
+    width: 2px;
+    height: 1px;
+    background-color: transparent;
+}
+
+#Header-navbar::-webkit-scrollbar-thumb{
+    background-color: #FD9330;
+}
+
+#Header-navbar::-webkit-scrollbar-corner{
+    background-color: transparent;
 }
 
 .logo-nav {
@@ -17,6 +33,7 @@
     border-radius: 0.3em;
     background: transparent;
     color: white;
+    min-width: 250px;
 }
 
 .fontAwesome {

@@ -1,29 +1,11 @@
-.FloatingButton {
-    --button-size: 68px;
-
-    --button-position: 25px;
-
+#FloatingButton {
     position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    right: var(--button-position);
-    bottom: var(--button-position);
-    width: var(--button-size);
-    height: var(--button-size);
-
-    border-radius: 50%;
-    background: transparent;
     color: #FD9330;
-
-    font-family: FontAwesome;
     font-size: 3rem;
     cursor: pointer;
-
     z-index: 1000;
-    user-select: none;
-}
-.FloatingButton:hover {
-    opacity: 0.8;
+    opacity: 1;
+    inset-block: auto 5vmin;
+    inset-inline: auto 5vmin;
+    transition: 0.3s ease-out;
 }
