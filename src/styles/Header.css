@@ -1,6 +1,5 @@
 #Header {
     position: fixed;
-    background: linear-gradient(#212529 60%, transparent);
 }
 
 #Header-navbar {
@@ -32,7 +31,6 @@
     border: 1px solid #FD9330;
     border-radius: 0.3em;
     background: transparent;
-    color: white;
     min-width: 250px;
 }
 
@@ -51,12 +49,7 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
 
 .Navbar-list-item > span, .Submenu-item > span {
     cursor: pointer;
-    color: white;
     transition: 0.3s ease-out;
-}
-
-.Submenu-item > span:hover {
-    color: #FD9330;
 }
 
 .Navbar-list-item {
@@ -69,7 +62,6 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
 
 .Submenu {
     position: fixed;
-    background-color: #212529;
     border: 2px solid #FD9330;
     border-radius: 10px;
     opacity: 0;

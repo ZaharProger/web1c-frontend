@@ -12,8 +12,14 @@ export const ROUTES = {
     debtor_contracts: '/debtor-contracts'
 }
 
+export const THEME = {
+    light: 'light',
+    dark: 'dark'
+}
+
 export const LOCAL_STORAGE_KEYS = {
-    isLogged: 'isLogged'
+    prevRoute: 'prev_route',
+    theme: 'theme'
 }
 
 export const VALIDATION_CASES = {
@@ -61,7 +67,7 @@ export const BUTTON_KEYS = {
     events_button: 'events',
     debtor_contracts_button: 'debtor_contracts',
     settings_button: 'settings',
-    sign_out_button: 'sign_out'
+    sign_out_button: 'sign_out',
 }
 
 export const PANE_TEMPLATES = {
@@ -116,6 +122,27 @@ export const PANE_TEMPLATES = {
             caption: 'Выход',
             route: ROUTES.auth,
             sub_items: []
+        }
+    ]
+}
+
+export const FIELD_TYPES = {
+    flag: 0,
+    text: 1,
+    dropdown: 2,
+    radio: 3
+}
+
+export const FIELD_KEYS = {
+    theme: 'theme'
+}
+
+export const FIELDS = {
+    settings: [
+        {
+            key: FIELD_KEYS.theme,
+            name: 'Использовать темную тему',
+            type: FIELD_TYPES.flag
         }
     ]
 }

@@ -1,0 +1,36 @@
+#Settings-form {
+    background-color: transparent;
+    border-radius: 10px;
+    border: 2px solid #FD9330;
+    min-width: 300px;
+}
+
+.Settings-item > span, .Settings-item > input {
+    background: transparent;
+}
+
+.Settings-item > input[type='checkbox'] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 2px solid #FD9330;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.Settings-item > input[type='checkbox']:checked {
+    background-color: #FD9330;
+    position: relative;
+}
+
+.Settings-item > input[type='checkbox']:checked::before {
+    content: "\2713";
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    top: -4px;
+    left: 5px;
+}

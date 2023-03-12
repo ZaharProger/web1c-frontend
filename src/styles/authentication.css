@@ -12,15 +12,10 @@
 .info input {
     margin: 0 20px 40px 20px;
     font-size: 21px;
+    background: white;
     border-radius: 1em;
-    border: 1px solid white;
-    border-bottom: 5px solid;
-    border-bottom-color: transparent;
-}
-.info input:focus {
-    outline: 0;
-    outline-offset: 0;
-    border-color: #FD9330;
+    border: 2px solid;
+    outline: none;
 }
 .info button {
     margin: 60px auto 10px;
@@ -33,7 +28,7 @@
     transition: 0.3s;
 }
 .info button:hover {
-    color: #212529;
+    color: white;
     background-color: #FD9330;
 }
 

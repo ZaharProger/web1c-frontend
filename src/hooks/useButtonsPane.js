@@ -1,10 +1,12 @@
-import {API, BUTTON_KEYS, PANE_TEMPLATES, SERVER_ERROR_MESSAGE} from "../globalConstants";
+import {API, BUTTON_KEYS, FIELDS, PANE_TEMPLATES, SERVER_ERROR_MESSAGE} from "../globalConstants";
 import useRedirection from "./useRedirection";
 import useApi from "./useApi";
 import useRedux from "./useRedux";
 import {MODAL_STATE, SUBMENU_STATE} from "../state-manager/stateConstants";
 import NavbarListItem from "../components/header/NavbarListItem";
 import SubMenuItem from "../components/header/SubMenuItem";
+import SettingsItem from "../components/content/settings/settingsItem";
+import React from "react";
 
 export function useButtonsPane(template) {
     const redirect = useRedirection()
@@ -45,6 +47,11 @@ export function useButtonsPane(template) {
                 item_index: i,
                 is_sign_out: key === BUTTON_KEYS.sign_out_button
             }} />)
+        }
+        else if (template === FIELDS.settings) {
+            buttonsPane.push(
+                <SettingsItem  key={ template[i].key } data={ template[i] } />
+            )
         }
         else {
             const { key, caption, route } = template[i]

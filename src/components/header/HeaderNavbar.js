@@ -1,18 +1,22 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {useButtonsPane} from "../../hooks/useButtonsPane";
 import {BUTTON_KEYS, PANE_TEMPLATES} from "../../globalConstants";
 import useRedux from "../../hooks/useRedux";
 import {SUBMENU_STATE} from "../../state-manager/stateConstants";
+import {appContext} from "../../contexts";
 
 const HeaderNavbar = () => {
     const navItems = useButtonsPane(PANE_TEMPLATES.navbar)
     const updateSubMenuState = useRedux(SUBMENU_STATE)
+
+    const isDarkTheme = useContext(appContext).theme
 
     useEffect(() => {
         const items = document.querySelectorAll('.Navbar-list-item, .Submenu-item')
 
         for (let  i = 0; i < items.length; ++i) {
             const itemText = items[i].querySelector('span')
+
             itemText.onmouseover = () => {
                 itemText.style.color = '#FD9330'
                 if (items[i].classList.contains('Navbar-list-item')) {
@@ -33,7 +37,7 @@ const HeaderNavbar = () => {
                     }
 
                     if (!inSubMenuArea) {
-                        itemText.style.color = '#FFFFFF'
+                        itemText.style.color = isDarkTheme? '#FFFFFF' : '#212529'
                         updateSubMenuState(-1)
                     }
                 }

@@ -1,4 +1,4 @@
-import boom from '../../pics/boom.png';
+import React from "react";
 
 export default function Error404() {
     return (
@@ -11,7 +11,7 @@ export default function Error404() {
                     Page is not found
                 </p>
             </div>
-            <img src={boom}></img>
+            <img src="/pics/boom.png" alt="page not found"></img>
         </div>
     )
 }
