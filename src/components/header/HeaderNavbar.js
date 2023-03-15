@@ -18,10 +18,12 @@ const HeaderNavbar = () => {
             const itemText = items[i].querySelector('span')
 
             itemText.onmouseover = () => {
-                itemText.style.color = '#FD9330'
                 if (items[i].classList.contains('Navbar-list-item')) {
+                    document.querySelectorAll('.Navbar-list-item').forEach(item =>
+                        item.querySelector('span').style.color = isDarkTheme? '#FFFFFF' : '#212529')
                     updateSubMenuState(i)
                 }
+                itemText.style.color = '#FD9330'
             }
             itemText.onmouseleave = (e) => {
                 const isParentItem = items[i].classList.contains('Navbar-list-item')
