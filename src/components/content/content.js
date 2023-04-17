@@ -7,6 +7,9 @@ import FloatingButton from "./chatbot/floatingButton";
 import ChatBot from "./chatbot/chatBot";
 import {ROUTES} from "../../globalConstants";
 import SettingsForm from "./settings/settingsForm";
+import DebtorCard from "./cards/debtorCard";
+import DebtorContract from "./cards/debtorContract";
+import EventRecord from "./cards/eventRecord";
 
 const Content = () => {
     const location = useLocation()
@@ -14,6 +17,11 @@ const Content = () => {
 
     const getCards = () => {
         const cards = []
+
+        cards.push(<Card><DebtorCard/></Card>)
+        cards.push(<Card><DebtorContract/></Card>)
+        cards.push(<Card><EventRecord/></Card>)
+
         for (let i = 0; i < 30; ++i) {
             cards.push(
                 <Card key={ i }>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -26,7 +34,6 @@ const Content = () => {
                     quam elementum pulvinar etiam non quam lacus.</Card>
             )
         }
-
         return cards
     }
 
