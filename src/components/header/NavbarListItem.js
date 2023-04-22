@@ -1,23 +1,28 @@
 import React from "react";
 import SubMenu from "./SubMenu";
 import {useSelector} from "react-redux";
-import {BUTTON_KEYS, PANE_TEMPLATES} from "../../globalConstants";
+import {BUTTONS, ROUTES} from "../../globalConstants";
 
 const NavbarListItem = (props) => {
-    const { callback, caption, item_index, is_sign_out } = props.item_data
+    const { callback, icon, caption, item_index, is_sign_out } = props.item_data
     const subMenuState = useSelector(state => state.subMenuState)
 
-    const itemsWithoutSubMenu = PANE_TEMPLATES.navbar
-        .filter(templateItem => [BUTTON_KEYS.sign_out_button, BUTTON_KEYS.settings_button]
-            .includes(templateItem.key))
+    const itemsWithoutSubMenu = BUTTONS.navbar.filter(templateItem =>
+        [ROUTES.auth, ROUTES.settings].includes(templateItem.route))
 
     return (
         <div className={ `Navbar-list-item${is_sign_out? ' sign-out-item' : ''}` }>
-            <span onClick={ () => { if (callback !== null) callback() } } >
-                { caption }
-            </span>
             {
-                subMenuState === item_index && !itemsWithoutSubMenu.includes(PANE_TEMPLATES.navbar[item_index])?
+                icon === null?
+                    <span onClick={ () => { if (callback !== null) callback() } } >
+                        { caption }
+                    </span>
+                    :
+                    <i className={ `fa-regular fa-${icon} d-flex mt-auto mb-auto` }
+                       onClick={ () => { if (callback !== null) callback() } }></i>
+            }
+            {
+                subMenuState === item_index && !itemsWithoutSubMenu.includes(BUTTONS.navbar[item_index])?
                     <SubMenu parent_item={ item_index } />
                     :
                     null

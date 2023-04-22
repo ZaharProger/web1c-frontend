@@ -1,20 +1,15 @@
 import React from "react";
-import {FIELD_KEYS, FIELD_TYPES, LOCAL_STORAGE_KEYS, THEME} from "../../../globalConstants";
+import {FIELD_TYPES, LOCAL_STORAGE_KEYS, THEME} from "../../../globalConstants";
 
 const SettingsItem = (props) => {
-    const { key, name, type } = props.data
-
-    let isItemChecked
-    switch (key) {
-        case FIELD_KEYS.theme:
-            isItemChecked = localStorage.getItem(LOCAL_STORAGE_KEYS.theme) === THEME.dark
-            break
-    }
+    const { name, type } = props.data
 
     let interactionItem
+
     switch (type) {
         case FIELD_TYPES.flag:
-            interactionItem = <input type="checkbox" className="d-flex mt-auto mb-auto" checked={ isItemChecked }></input>
+            const isDarkTheme = localStorage.getItem(LOCAL_STORAGE_KEYS.theme) === THEME.dark
+            interactionItem = <input type="checkbox" className="d-flex mt-auto mb-auto" checked={ isDarkTheme }></input>
             break
     }
 

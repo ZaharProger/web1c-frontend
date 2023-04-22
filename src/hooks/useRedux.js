@@ -4,7 +4,14 @@ import changeProfileData from '../state-manager/actions/changeProfileData';
 import changeModalState from '../state-manager/actions/changeModalState';
 import changeSubMenuState from '../state-manager/actions/changeSubMenuState';
 import changeChatBotState from "../state-manager/actions/changeChatBotState";
-import {PROFILE_DATA, MODAL_STATE, SUBMENU_STATE, CHATBOT_STATE} from '../state-manager/stateConstants';
+import {
+    PROFILE_DATA,
+    MODAL_STATE,
+    SUBMENU_STATE,
+    CHATBOT_STATE,
+    MOBILE_MENU_STATE
+} from '../state-manager/stateConstants';
+import changeMobileMenuState from "../state-manager/actions/changeMobileMenuState";
 
 export default function useRedux(reduxAction){
     const dispatch = useDispatch();
@@ -24,6 +31,9 @@ export default function useRedux(reduxAction){
             break;
         case CHATBOT_STATE:
             callback = (chatBotState) => dispatch(changeChatBotState(chatBotState));
+            break;
+        case MOBILE_MENU_STATE:
+            callback = (mobileMenuState) => dispatch(changeMobileMenuState(mobileMenuState));
             break;
     }
 

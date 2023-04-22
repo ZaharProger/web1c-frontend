@@ -1,14 +1,14 @@
 import React, {useEffect} from "react";
 import '../../../styles/settings.css';
 import {FIELDS, LOCAL_STORAGE_KEYS, THEME} from "../../../globalConstants";
-import {useButtonsPane} from "../../../hooks/useButtonsPane";
+import {useLayout} from "../../../hooks/useLayout";
 import useRedirection from "../../../hooks/useRedirection";
 import {useLocation} from "react-router-dom";
 
 const SettingsForm = () => {
     const location = useLocation()
     const redirect = useRedirection()
-    const settingsList = useButtonsPane(FIELDS.settings)
+    const settingsList = useLayout(FIELDS.settings)
 
     useEffect(() => {
         document.querySelectorAll('.Settings-item').forEach(item => {

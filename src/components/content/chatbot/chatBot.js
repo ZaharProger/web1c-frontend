@@ -15,10 +15,6 @@ const ChatBot = () => {
 
         chatBot.querySelectorAll('input, span').forEach(text =>
             text.style.color = isDarkTheme? '#FFFFFF' : '#212529')
-
-        const sendButton = document.getElementById("chat-send")
-        sendButton.onmouseover = () => sendButton.classList.replace('fa-regular', 'fa-solid')
-        sendButton.onmouseleave = () => sendButton.classList.replace('fa-solid', 'fa-regular')
     }, [location])
 
     return (

@@ -1,6 +1,6 @@
 import {Route, Routes, useLocation} from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 import ContentWrap from './content/contentWrap';
 import Error404 from './error/error404';
@@ -12,17 +12,35 @@ import {appContext} from "../contexts";
 import '../styles/placeholder.css';
 import '../styles/validation.css';
 import '../styles/body.css';
+import '../styles/media.css';
+import useRedux from "../hooks/useRedux";
+import {MOBILE_MENU_STATE} from "../state-manager/stateConstants";
 
 export default function App() {
     const location = useLocation()
-    const { isActive, message } = useSelector(state => state.modalState);
+    const [isMobileScreen, changeMobileScreen] = useState(window.innerWidth <= 1000)
+    const changeMenuState = useRedux(MOBILE_MENU_STATE)
+
+    const {isActive, message} = useSelector(state => state.modalState)
+    const currentChatBotState = useSelector(state => state.chatBotState)
+    const mobileMenuState = useSelector(state => state.mobileMenuState)
 
     if (localStorage.getItem(LOCAL_STORAGE_KEYS.theme) === null) {
         localStorage.setItem(LOCAL_STORAGE_KEYS.theme, THEME.dark)
     }
 
     const contextData = {
-        theme: localStorage.getItem(LOCAL_STORAGE_KEYS.theme) === THEME.dark
+        theme: localStorage.getItem(LOCAL_STORAGE_KEYS.theme) === THEME.dark,
+        is_mobile_screen: isMobileScreen,
+        chatbot_state: currentChatBotState,
+        mobile_menu_state: mobileMenuState
+    }
+
+    window.onresize = () => {
+        changeMobileScreen(window.innerWidth <= 1000)
+        if (window.innerWidth > 1000) {
+            changeMenuState(false)
+        }
     }
 
     useEffect(() => {
@@ -31,17 +49,44 @@ export default function App() {
                 container.style.background = contextData.theme? '#212529' : '#FFFFFF'
             }
             else {
-                container.style.background = `linear-gradient(${contextData.theme? 
-                    '#212529' : '#FFFFFF'} 60%, transparent)`
+                container.style.background =
+                    `linear-gradient(${contextData.theme? '#212529' : '#FFFFFF'} 60%, transparent)`
             }
         })
 
-        document.querySelectorAll('span, input, p, .Card').forEach(text => {
+        document.querySelectorAll('span, input, p').forEach(text => {
             if (text.classList.contains('auth')) {
                 text.style.color = '#212529'
             }
             else {
                 text.style.color = contextData.theme? '#FFFFFF' : '#212529'
+            }
+        })
+
+        document.querySelectorAll('i').forEach(icon => {
+            if (!icon.parentElement.classList.contains('Navbar-list-item')) {
+                if (icon.classList.contains('fa-bars') || icon.classList.contains('fa-magnifying-glass')) {
+                    icon.classList.replace(mobileMenuState ? 'fa-bars' : 'fa-magnifying-glass',
+                        mobileMenuState ? 'fa-magnifying-glass' : 'fa-bars')
+                }
+
+                if (icon.classList.contains('fa-ellipsis')) {
+                    icon.style.color = '#FFFFFF'
+                }
+                else {
+                    icon.style.color = '#FD9330'
+                }
+
+                icon.style.transition = '0.3s ease-out'
+                icon.onmouseover = () => {
+                    icon.style.transform = 'scale(1.3)'
+                }
+                icon.onmouseleave = () => {
+                    icon.style.transform = 'scale(1)'
+                }
+            }
+            else {
+                icon.style.color = contextData.theme? '#FFFFFF' : '#212529'
             }
         })
 
@@ -61,7 +106,7 @@ export default function App() {
                 }
             })
         }
-    }, [location])
+    }, [location, isMobileScreen, currentChatBotState, mobileMenuState])
 
     return (
         <appContext.Provider value={ contextData }>
@@ -74,6 +119,9 @@ export default function App() {
                         <Route path={ROUTES.main} element={<ContentWrap />} />
                         <Route path={ROUTES.auth} element={<AuthenticationWrap />} />
                         <Route path={ROUTES.settings} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.debtors}/:id`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.debtor_contracts}/:id`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.events}/:id`} element={<ContentWrap />} />
                     </Route>
                     <Route path={ROUTES.notFound} element={<Error404 />} />
                 </Routes>

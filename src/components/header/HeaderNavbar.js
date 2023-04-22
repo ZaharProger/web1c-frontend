@@ -1,26 +1,28 @@
 import React, {useContext, useEffect} from "react";
-import {useButtonsPane} from "../../hooks/useButtonsPane";
-import {BUTTON_KEYS, PANE_TEMPLATES} from "../../globalConstants";
+import {useLayout} from "../../hooks/useLayout";
+import {BUTTONS, ROUTES} from "../../globalConstants";
 import useRedux from "../../hooks/useRedux";
 import {SUBMENU_STATE} from "../../state-manager/stateConstants";
 import {appContext} from "../../contexts";
+import {useSelector} from "react-redux";
 
 const HeaderNavbar = () => {
-    const navItems = useButtonsPane(PANE_TEMPLATES.navbar)
+    const navItems = useLayout(BUTTONS.navbar)
     const updateSubMenuState = useRedux(SUBMENU_STATE)
 
     const isDarkTheme = useContext(appContext).theme
+    const mobileMenuState = useSelector(state => state.mobileMenuState)
 
     useEffect(() => {
         const items = document.querySelectorAll('.Navbar-list-item, .Submenu-item')
 
         for (let  i = 0; i < items.length; ++i) {
-            const itemText = items[i].querySelector('span')
+            const itemText = items[i].querySelector('span, i')
 
             itemText.onmouseover = () => {
                 if (items[i].classList.contains('Navbar-list-item')) {
                     document.querySelectorAll('.Navbar-list-item').forEach(item =>
-                        item.querySelector('span').style.color = isDarkTheme? '#FFFFFF' : '#212529')
+                        item.querySelector('span, i').style.color = isDarkTheme? '#FFFFFF' : '#212529')
                     updateSubMenuState(i)
                 }
                 itemText.style.color = '#FD9330'
@@ -29,8 +31,7 @@ const HeaderNavbar = () => {
                 const isParentItem = items[i].classList.contains('Navbar-list-item')
 
                 if (isParentItem) {
-                    const hasSubMenu = ![BUTTON_KEYS.settings_button, BUTTON_KEYS.sign_out_button]
-                        .includes(PANE_TEMPLATES.navbar[i].key)
+                    const hasSubMenu = ![ROUTES.settings, ROUTES.auth].includes(BUTTONS.navbar[i].route)
                     let inSubMenuArea = false
                     if (hasSubMenu) {
                         const { left, right, bottom, top } = items[i].children[1].getBoundingClientRect()
@@ -48,10 +49,10 @@ const HeaderNavbar = () => {
                 }
             }
         }
-    }, [navItems])
+    }, [navItems, mobileMenuState])
 
     return (
-        <div id="Header-navbar" className="d-flex flex-row mt-auto mb-auto ms-auto me-4">
+        <div id="Header-navbar" className="d-flex flex-row">
             {
                 navItems
             }

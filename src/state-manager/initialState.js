@@ -5,7 +5,8 @@ const initialState = {
     },
     subMenuState: false,
     chatBotState: false,
-    profileData: null
+    profileData: null,
+    mobileMenuState: false
 }
 
 export default initialState;
