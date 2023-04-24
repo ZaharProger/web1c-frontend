@@ -4,21 +4,22 @@ import '../../../styles/card.css';
 
 export default function DebtorCard(props) {
     return (
-        <div className="CardInfo d-flex flex-column text-white">
-            
-            <div>
-                <label>Наименование:</label>
-                <input name="name" type="text"></input>
-            </div>
-            <div>
+        <div>
+            <div className="d-flex justify-content-end pb-2">
                 <label>Дата создания:</label>
-                <input name="date" type="date"></input>
+                <label>25.04.2023</label>
             </div>
-            <div>
-                <label>Должник:</label>
-                <input name="debtor" type="text"></input>
-            </div>
+            <div className="CardInfo">
+                <div>
+                    <label>Наименование:</label>
+                    <label>Lorem ipsum</label>
+                </div>
+                <div>
+                    <label>Должник:</label>
+                    <label>Ivanov Ivan</label>
+                </div>
 
+            </div>
         </div>
     );
 }

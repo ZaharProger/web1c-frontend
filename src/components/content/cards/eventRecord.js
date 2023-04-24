@@ -4,19 +4,21 @@ import '../../../styles/card.css';
 
 export default function EventRecord(props) {
     return (
-        <div className="CardInfo d-flex flex-column text-white">
-            
-            <div>
-                <label>Номер:</label>
-                <input name="number" type="number"></input>
-            </div>
-            <div>
+        <div>
+            <div className="d-flex justify-content-end pb-2">
                 <label>Дата создания:</label>
-                <input name="date" type="date"></input>
+                <label>25.04.2023</label>
             </div>
-            <div>
-                <label>Документ основание:</label>
-                <input name="document" type="text"></input>
+
+            <div className="CardInfo">
+                <div>
+                    <label>Номер:</label>
+                    <label>Number</label>
+                </div>
+                <div>
+                    <label>Документ основание:</label>
+                    <label>Document</label>
+                </div>
             </div>
 
         </div>
