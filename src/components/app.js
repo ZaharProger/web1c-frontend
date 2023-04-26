@@ -119,9 +119,12 @@ export default function App() {
                         <Route path={ROUTES.main} element={<ContentWrap />} />
                         <Route path={ROUTES.auth} element={<AuthenticationWrap />} />
                         <Route path={ROUTES.settings} element={<ContentWrap />} />
-                        <Route path={`${ROUTES.debtors}/:id`} element={<ContentWrap />} />
-                        <Route path={`${ROUTES.debtor_contracts}/:id`} element={<ContentWrap />} />
-                        <Route path={`${ROUTES.events}/:id`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.classes}${ROUTES.debtors}`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.documents}${ROUTES.debtor_contracts}`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.documents}${ROUTES.events}`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.classes}${ROUTES.debtors}/:id`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.documents}${ROUTES.debtor_contracts}/:id`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.documents}${ROUTES.events}/:id`} element={<ContentWrap />} />
                     </Route>
                     <Route path={ROUTES.notFound} element={<Error404 />} />
                 </Routes>

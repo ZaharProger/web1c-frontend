@@ -9,9 +9,10 @@ import {
     MODAL_STATE,
     SUBMENU_STATE,
     CHATBOT_STATE,
-    MOBILE_MENU_STATE
+    MOBILE_MENU_STATE, CARDS
 } from '../state-manager/stateConstants';
 import changeMobileMenuState from "../state-manager/actions/changeMobileMenuState";
+import changeCards from "../state-manager/actions/changeCards";
 
 export default function useRedux(reduxAction){
     const dispatch = useDispatch();
@@ -35,6 +36,8 @@ export default function useRedux(reduxAction){
         case MOBILE_MENU_STATE:
             callback = (mobileMenuState) => dispatch(changeMobileMenuState(mobileMenuState));
             break;
+        case CARDS:
+            callback = (cards) => dispatch(changeCards(cards));
     }
 
     return callback

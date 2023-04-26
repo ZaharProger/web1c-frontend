@@ -9,7 +9,7 @@ export default function FullCardItem(props) {
 
     const direction = data.type === FIELD_TYPES.flag? 'flex-row' : 'flex-column'
     const margin = isLastItem? 'mb-0' : 'mb-4'
-    const labelStyle = data.type === FIELD_TYPES.flag? 'me-1 mt-auto mb-auto' : 'mb-2'
+    const labelStyle = data.type === FIELD_TYPES.flag? 'me-2 mt-auto mb-auto' : 'mb-2'
 
     let inputType = null
     switch (data.type) {

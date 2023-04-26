@@ -10,6 +10,7 @@ import SubMenuItem from "../components/header/SubMenuItem";
 import SettingsItem from "../components/content/settings/settingsItem";
 import FullCardItem from "../components/content/cards/FullCardItem";
 import {useSelector} from "react-redux";
+import CardItem from "../components/content/cards/CardItem";
 
 export function useLayout(template) {
     const redirect = useRedirection()
@@ -66,10 +67,23 @@ export function useLayout(template) {
                 <SettingsItem  key={ `Settings-item_${i}` } data={ template[i] } />
             )
         }
-        else if ([FIELDS.debtor_contract_card, FIELDS.debtor_card, FIELDS.event_card].includes(template)) {
+        else if ([FIELDS.long.debtor_contract_card, FIELDS.long.debtor_card,
+            FIELDS.long.event_card].includes(template)) {
+
             layoutItems.push(<FullCardItem key={ `Full-card-item_${i}` } data={{
                 data: template[i],
                 isLastItem: i == template.length - 1
+            }} />)
+        }
+        else if ([FIELDS.short.debtor_contract_card_short, FIELDS.short.debtor_card_short,
+            FIELDS.short.event_card_short].includes(template)) {
+
+            const isDate = template[i].toLowerCase().includes('дата')
+            const fieldMargins = `${isDate? 'mb-2 ms-auto' : 'mb-2 ms-0'}`
+
+            layoutItems.push(<CardItem key={ `Card-item_${i}` } data={{
+                field_margins: fieldMargins,
+                item_name: template[i]
             }} />)
         }
         else {

@@ -63,6 +63,8 @@
 .Full-card-item > input, .Full-card-item > div > input {
     border: 1px solid #FD9330;
     background-color: transparent;
+    border-radius: 20px;
+    padding: 3px 8px;
 }
 
 .Full-card-item > input[type='date'] {

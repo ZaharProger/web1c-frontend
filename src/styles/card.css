@@ -4,6 +4,7 @@
     overflow: hidden;
     width: 400px;
     flex-grow: 1;
+    cursor: pointer;
 }
 
 .CardInfo > div:not(:last-child) {
@@ -12,6 +13,12 @@
 
 div > label:not(:first-child) {
     margin-left: 10px;
+}
+
+
+.Card-item:first-child {
+    background-color: #FD9330;
+    border-radius: 0 0 0 10px;
 }
 
 /* input {
