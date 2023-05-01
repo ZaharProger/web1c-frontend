@@ -65,8 +65,15 @@ const Content = (props) => {
         let cardCounter = 0
 
         if (props.has_param) {
-            const cardKeys = Object.keys(cardsData[cardCounter])
-            let keyCounter = 0
+            let filterIterator = -1
+            const cardKeys = Object.keys(cardsData[cardCounter]).filter(cardKey => {
+                ++filterIterator
+                return !cardKey.includes("id") || (cardKey.includes("id") && filterIterator == 1)
+            })
+
+            let keyCounter = 1
+
+            console.log(cardKeys)
 
             document.querySelectorAll('.Full-card-item').forEach(fullCardItem => {
                 const input = fullCardItem.querySelector('input, label')
@@ -94,13 +101,13 @@ const Content = (props) => {
         else {
             let keyOrder = []
             if (location.pathname.includes(ROUTES.debtors)){
-                keyOrder = [2, 0, 1, 3]
+                keyOrder = [3, 1, 2, 4]
             }
             else if (location.pathname.includes(ROUTES.debtor_contracts)) {
-                keyOrder = [3, 0, 1, 2, 4]
+                keyOrder = [5, 1, 2, 4]
             }
             else if(location.pathname.includes(ROUTES.events)) {
-                keyOrder = [1, 0, 2, 3]
+                keyOrder = [2, 1, 3, 4]
             }
 
             document.querySelectorAll('.Card').forEach(card => {
