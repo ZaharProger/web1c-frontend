@@ -73,8 +73,6 @@ const Content = (props) => {
 
             let keyCounter = 1
 
-            console.log(cardKeys)
-
             document.querySelectorAll('.Full-card-item').forEach(fullCardItem => {
                 const input = fullCardItem.querySelector('input, label')
                 const itemKey = cardKeys[keyCounter]
