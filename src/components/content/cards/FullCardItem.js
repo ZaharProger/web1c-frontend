@@ -23,10 +23,13 @@ export default function FullCardItem(props) {
                 </div>
             break
         case FIELD_TYPES.date:
-            inputType = <input type="date" className="d-flex ms-0"></input>
+            inputType = <input type="datetime-local" className="d-flex ms-0"></input>
             break
         case FIELD_TYPES.flag:
             inputType = <input type="checkbox" className="d-flex me-auto" checked={ false }></input>
+            break
+        case FIELD_TYPES.label:
+            inputType = <label className="d-flex ms-0 mb-0 p-0"></label>
             break
     }
 

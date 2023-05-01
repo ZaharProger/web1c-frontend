@@ -58,7 +58,8 @@ export const API = {
     },
     params: {
         requestType: 'requestType',
-        type: 'type'
+        type: 'type',
+        key: 'Key'
     }
 }
 
@@ -130,7 +131,8 @@ export const FIELD_TYPES = {
     flag: 0,
     text: 1,
     radio: 2,
-    date: 3
+    date: 3,
+    label: 4
 }
 
 export const FIELDS = {
@@ -155,18 +157,13 @@ export const FIELDS = {
             },
             {
                 name: 'Дата создания',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.label,
                 route: null
             },
             {
                 name: 'Должник',
                 type: FIELD_TYPES.text,
                 route: ROUTES.debtors
-            },
-            {
-                name: 'Статус',
-                type: FIELD_TYPES.text,
-                route: null
             },
             {
                 name: 'ИНН',
@@ -180,28 +177,13 @@ export const FIELDS = {
             },
             {
                 name: 'СМП',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.flag,
                 route: null
-            },
-            {
-                name: 'Типы связанных сторон',
-                type: FIELD_TYPES.text,
-                route: ROUTES.sides
             },
             {
                 name: 'Санкции',
                 type: FIELD_TYPES.text,
                 route: ROUTES.sanctions
-            },
-            {
-                name: 'Статус благонадежности',
-                type: FIELD_TYPES.text,
-                route: null
-            },
-            {
-                name: 'Бюджетная организация',
-                type: FIELD_TYPES.text,
-                route: ROUTES.societies
             },
             {
                 name: 'Банкротство',
@@ -269,11 +251,6 @@ export const FIELDS = {
                 name: 'Комментарий',
                 type: FIELD_TYPES.text,
                 route: null
-            },
-            {
-                name: 'Внешняя информационная база',
-                type: FIELD_TYPES.text,
-                route: ROUTES.external_is
             },
             {
                 name: 'Общество',
@@ -383,10 +360,10 @@ export const FIELDS = {
                 route: ROUTES.users
             },
             {
-                name: 'Состояние',
+                name: 'Статус',
                 type: FIELD_TYPES.text,
                 route: ROUTES.event_states
-            },
+            }
         ]
     },
     short: {
@@ -400,14 +377,13 @@ export const FIELDS = {
             'Дата',
             'Код',
             'Наименование',
-            'Основание',
-            'Ответственный'
+            'Основание'
         ],
         event_card_short: [
             'Дата создания',
             'Номер',
-            'Документ основание',
-            'Ответственный'
+            'Вид работы',
+            'Карточка'
         ]
     }
 }

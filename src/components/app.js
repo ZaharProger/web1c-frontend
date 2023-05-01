@@ -54,7 +54,7 @@ export default function App() {
             }
         })
 
-        document.querySelectorAll('span, input, p').forEach(text => {
+        document.querySelectorAll('span, input, p, label').forEach(text => {
             if (text.classList.contains('auth')) {
                 text.style.color = '#212529'
             }
@@ -122,9 +122,9 @@ export default function App() {
                         <Route path={`${ROUTES.classes}${ROUTES.debtors}`} element={<ContentWrap />} />
                         <Route path={`${ROUTES.documents}${ROUTES.debtor_contracts}`} element={<ContentWrap />} />
                         <Route path={`${ROUTES.documents}${ROUTES.events}`} element={<ContentWrap />} />
-                        <Route path={`${ROUTES.classes}${ROUTES.debtors}/:id`} element={<ContentWrap />} />
-                        <Route path={`${ROUTES.documents}${ROUTES.debtor_contracts}/:id`} element={<ContentWrap />} />
-                        <Route path={`${ROUTES.documents}${ROUTES.events}/:id`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.classes}${ROUTES.debtors}?Key=:id`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.documents}${ROUTES.debtor_contracts}?Key=:id`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.documents}${ROUTES.events}?Key=:id`} element={<ContentWrap />} />
                     </Route>
                     <Route path={ROUTES.notFound} element={<Error404 />} />
                 </Routes>

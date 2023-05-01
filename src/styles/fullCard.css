@@ -67,9 +67,9 @@
     padding: 3px 8px;
 }
 
-.Full-card-item > input[type='date'] {
+.Full-card-item > input[type='datetime-local'] {
+    min-width: 220px;
     width: 20%;
-    min-width: 138px;
 }
 
 .Full-card-item > input[type='text'] {

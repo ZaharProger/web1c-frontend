@@ -14,7 +14,7 @@ export default function ProtectedRoutes() {
     const updateProfileData = useRedux(PROFILE_DATA);
     const updateModalInfo = useRedux(MODAL_STATE);
 
-    const prevRoute = localStorage.getItem(LOCAL_STORAGE_KEYS.prevRoute)
+    let prevRoute = localStorage.getItem(LOCAL_STORAGE_KEYS.prevRoute)
     localStorage.removeItem(LOCAL_STORAGE_KEYS.prevRoute)
 
     const getProfileData = useCallback(async () => {
@@ -43,12 +43,12 @@ export default function ProtectedRoutes() {
     }, [location.pathname]);
 
     let component;
+    localStorage.setItem(LOCAL_STORAGE_KEYS.prevRoute, isLocationAuth? prevRoute : location.pathname)
+
     if (isLocationAuth){
-        localStorage.setItem(LOCAL_STORAGE_KEYS.prevRoute, prevRoute)
         component = isLogged? <Navigate to={ prevRoute !== null? prevRoute : ROUTES.main } /> : <Outlet />;
     }
     else{
-        localStorage.setItem(LOCAL_STORAGE_KEYS.prevRoute, location.pathname)
         component = isLogged? <Outlet /> : <Navigate to={ ROUTES.auth } />;
     }
 

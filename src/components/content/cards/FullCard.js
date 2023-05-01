@@ -24,7 +24,7 @@ export default function FullCard(props) {
 
         document.querySelector('.full-card-fields')
             .querySelectorAll('input').forEach(input => {
-                if (input.type == 'date') {
+                if (input.type == 'datetime-local') {
                     input.style.colorScheme = isDarkTheme? 'dark' : 'light'
                 }
         })

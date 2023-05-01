@@ -49,7 +49,7 @@ export default function AuthenticationWrap() {
                 const formData = new FormData(authForm);
                 formData.append(API.params.requestType, 0);
                 
-                const { ok, responseBody } = await performApiCall(API.endpoints.users, API.methods.post, formData);
+                const { ok, responseBody } = await performApiCall('/api/Users', API.methods.post, formData);
                 message = ok? responseBody.message : SERVER_ERROR_MESSAGE;
                 isModalActive = ok? !responseBody.result : true;    
                 errorInputs = ok? Array.from(document.getElementsByName(responseBody.incorrectFieldType)) : [];              

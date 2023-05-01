@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useEffect} from "react";
-import {useLocation, useParams} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 import Card from "./cards/card";
 import FloatingButton from "./chatbot/floatingButton";
@@ -10,10 +10,10 @@ import FullCard from "./cards/FullCard";
 import {appContext} from "../../contexts";
 import {useSelector} from "react-redux";
 import MainPage from "./mainPage/MainPage";
+import {parseDate} from "../../utils";
 
-const Content = () => {
+const Content = (props) => {
     const location = useLocation()
-    const params = useParams()
 
     const { chatbot_state, is_mobile_screen, theme } = useContext(appContext)
 
@@ -24,8 +24,7 @@ const Content = () => {
 
         for (let i = 0; i < cardsData.length; ++i) {
             cards.push(
-                <Card key={ `Card_${i + 1}` }
-                      route={`${location.pathname}/${cardsData[i][Object.keys(cardsData[i])[0]]}`} />
+                <Card key={ `Card_${i + 1}` } route={ cardsData[i].route } />
             )
         }
 
@@ -55,7 +54,7 @@ const Content = () => {
     else if (location.pathname === ROUTES.main) {
         contentData = <MainPage />
     }
-    else if (params.id !== undefined) {
+    else if (props.has_param) {
         contentData = <FullCard template={ defineCardTemplate() } />
     }
     else {
@@ -63,39 +62,70 @@ const Content = () => {
     }
 
     useEffect(() => {
-        let keyOrder = []
-        if (location.pathname.includes(ROUTES.debtors)){
-            keyOrder = [2, 0, 1, 3]
-        }
-        else if (location.pathname.includes(ROUTES.debtor_contracts)) {
-            keyOrder = [3, 0, 1, 2, 4]
-        }
-        else if(location.pathname.includes(ROUTES.events)) {
-            keyOrder = [1, 0, 2, 3]
-        }
-
         let cardCounter = 0
-        document.querySelectorAll('.Card').forEach(card => {
-            const cardsKeys = Object.keys(cardsData[cardCounter]).filter(key => {
-                return ![null, false, true, 0].includes(cardsData[cardCounter][key])
-            })
 
+        if (props.has_param) {
+            const cardKeys = Object.keys(cardsData[cardCounter])
             let keyCounter = 0
-            card.querySelectorAll('span').forEach(item => {
-                item.style.color = theme? '#FFFFFF' : '#212529'
 
-                const itemKey = cardsKeys[keyOrder[keyCounter]]
-                const isDate = itemKey.toLowerCase().includes('date')
-                const itemValue = isDate? new Date(cardsData[cardCounter][itemKey] * 1000).toLocaleString() :
-                    cardsData[cardCounter][itemKey]
+            document.querySelectorAll('.Full-card-item').forEach(fullCardItem => {
+                const input = fullCardItem.querySelector('input, label')
+                const itemKey = cardKeys[keyCounter]
 
-                item.innerText = `${item.innerText.split(':\xa0\xa0')[0]}:\xa0\xa0${itemValue}`
+                if (input.type == 'text') {
+                    input.value = cardsData[0][itemKey]
+                }
+                else if (input.type == 'datetime-local') {
+                    input.value = parseDate(new Date(cardsData[0][itemKey] * 1000), true)
+                }
+                else if (input.type == 'checkbox') {
+                    input.checked = cardsData[0][itemKey]
+                }
+                else {
+                    input.innerHTML = new Date(cardsData[0][itemKey]).toString() == 'Invalid Date'?
+                        cardsData[0][itemKey]
+                        :
+                        parseDate(new Date(cardsData[0][itemKey] * 1000))
+                }
 
                 ++keyCounter
             })
+        }
+        else {
+            let keyOrder = []
+            if (location.pathname.includes(ROUTES.debtors)){
+                keyOrder = [2, 0, 1, 3]
+            }
+            else if (location.pathname.includes(ROUTES.debtor_contracts)) {
+                keyOrder = [3, 0, 1, 2, 4]
+            }
+            else if(location.pathname.includes(ROUTES.events)) {
+                keyOrder = [1, 0, 2, 3]
+            }
 
-            ++cardCounter
-        })
+            document.querySelectorAll('.Card').forEach(card => {
+                const cardKeys = Object.keys(cardsData[cardCounter]).filter(key => {
+                    return ![null, false, true].includes(cardsData[cardCounter][key])
+                })
+                let keyCounter = 0
+
+                card.querySelectorAll('span').forEach(item => {
+                    item.style.color = theme? '#FFFFFF' : '#212529'
+
+                    const itemKey = cardKeys[keyOrder[keyCounter]]
+                    const isDate = itemKey.toLowerCase().includes('date')
+                    const itemValue = isDate?
+                        parseDate(new Date(cardsData[cardCounter][itemKey] * 1000)) :
+                        cardsData[cardCounter][itemKey]
+
+                    item.innerText = `${item.innerText.split(':\xa0\xa0')[0]}:\xa0\xa0${itemValue}`
+
+                    ++keyCounter
+                })
+
+                ++cardCounter
+            })
+        }
     }, [cardsData])
 
     return (

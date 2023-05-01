@@ -13,6 +13,7 @@ import {
 } from '../state-manager/stateConstants';
 import changeMobileMenuState from "../state-manager/actions/changeMobileMenuState";
 import changeCards from "../state-manager/actions/changeCards";
+import {useCallback} from "react";
 
 export default function useRedux(reduxAction){
     const dispatch = useDispatch();
@@ -40,5 +41,5 @@ export default function useRedux(reduxAction){
             callback = (cards) => dispatch(changeCards(cards));
     }
 
-    return callback
+    return useCallback(callback, [])
 }
