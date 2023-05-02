@@ -11,10 +11,8 @@ import SettingsItem from "../components/content/settings/settingsItem";
 import FullCardItem from "../components/content/cards/FullCardItem";
 import {useSelector} from "react-redux";
 import CardItem from "../components/content/cards/CardItem";
-import {useLocation} from "react-router-dom";
 
 export function useLayout(template) {
-    const location = useLocation()
     const redirect = useRedirection()
     const performApiCall = useApi()
 
@@ -22,6 +20,7 @@ export function useLayout(template) {
     const updateSubMenuState = useRedux(SUBMENU_STATE)
 
     const mobileMenuState = useSelector(state => state.mobileMenuState)
+    const prevRoute = useSelector(state => state.prevRoute)
 
     const layoutItems = []
 
@@ -63,7 +62,7 @@ export function useLayout(template) {
             const buttonClass = `d-flex me-${i == template.length - 1? '0' : '5'}`
 
             layoutItems.push(<button key={ key } className={ buttonClass }
-                                   onClick={ () => redirect(location.pathname, false) }>{ template[i].caption }</button>)
+                                   onClick={ () => redirect(prevRoute, false) }>{ template[i].caption }</button>)
         }
         else if (template === FIELDS.settings) {
             layoutItems.push(

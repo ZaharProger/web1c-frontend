@@ -5,6 +5,7 @@
     width: 400px;
     flex-grow: 1;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .CardInfo > div:not(:last-child) {

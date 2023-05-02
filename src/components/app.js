@@ -19,6 +19,7 @@ import {MOBILE_MENU_STATE} from "../state-manager/stateConstants";
 export default function App() {
     const location = useLocation()
     const [isMobileScreen, changeMobileScreen] = useState(window.innerWidth <= 1000)
+
     const changeMenuState = useRedux(MOBILE_MENU_STATE)
 
     const {isActive, message} = useSelector(state => state.modalState)
@@ -64,7 +65,7 @@ export default function App() {
         })
 
         document.querySelectorAll('i').forEach(icon => {
-            if (!icon.parentElement.classList.contains('Navbar-list-item')) {
+            if (!icon.parentElement.classList.contains('Navbar-list-item') && icon.parentElement.id !== 'Main-page') {
                 if (icon.classList.contains('fa-bars') || icon.classList.contains('fa-magnifying-glass')) {
                     icon.classList.replace(mobileMenuState ? 'fa-bars' : 'fa-magnifying-glass',
                         mobileMenuState ? 'fa-magnifying-glass' : 'fa-bars')
@@ -84,6 +85,9 @@ export default function App() {
                 icon.onmouseleave = () => {
                     icon.style.transform = 'scale(1)'
                 }
+            }
+            else if (icon.parentElement.id === 'Main-page') {
+                icon.style.color = '#FD9330'
             }
             else {
                 icon.style.color = contextData.theme? '#FFFFFF' : '#212529'

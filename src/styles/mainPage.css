@@ -1,0 +1,73 @@
+#Main-page > span {
+    font-weight: bold;
+    font-size: 1.7em;
+}
+
+#Main-page > div > p {
+    font-weight: normal;
+    font-size: 1.1em;
+    margin: 0;
+    padding: 0;
+}
+
+#Main-page > i {
+    font-size: 2.5em;
+    position: relative;
+    animation: main-page-icon-animation 0.4s ease-out 0s 1 forwards;
+}
+
+#Main-page > i:after {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 200px;
+    opacity: 0;
+    background: radial-gradient(#FD9330, transparent 70%);
+    left: -85px;
+    bottom: -2px;
+    animation: main-page-line-animation 0.3s ease-out 0.3s 1 forwards;
+}
+
+@keyframes main-page-icon-animation {
+    from {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes main-page-line-animation {
+    from {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    to {
+        opacity: 1;
+        transform: scaleX(50%);
+    }
+}
+
+.history-list {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-color: radial-gradient(#FD9330, transparent) transparent;
+    scrollbar-width: thin;
+    padding-bottom: 10px;
+}
+
+.history-list::-webkit-scrollbar{
+    width: 3px;
+    height: 3px;
+    background-color: transparent;
+}
+
+.history-list::-webkit-scrollbar-thumb{
+    background: radial-gradient(#FD9330, transparent);
+}
+
+.history-list::-webkit-scrollbar-corner{
+    background-color: transparent;
+}

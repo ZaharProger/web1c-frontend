@@ -20,7 +20,8 @@ export const ROUTES = {
     markets: '/markets',
     counteragents_categories: '/counteragents-categories',
     users: '/users',
-    event_states: '/event-states'
+    event_states: '/event-states',
+    history: '/History'
 }
 
 export const THEME = {
@@ -113,16 +114,6 @@ export const BUTTONS = {
             caption: 'Назад',
             route: null,
             sub_items: []
-        },
-        {
-            caption: 'Записать и закрыть',
-            route: null,
-            sub_items: []
-        },
-        {
-            caption: 'Записать',
-            route: null,
-            sub_items: []
         }
     ]
 }
@@ -132,7 +123,8 @@ export const FIELD_TYPES = {
     text: 1,
     radio: 2,
     date: 3,
-    label: 4
+    label: 4,
+    ref: 5
 }
 
 export const FIELDS = {
@@ -147,7 +139,7 @@ export const FIELDS = {
         debtor_card: [
             {
                 name: 'Код',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.label,
                 route: null
             },
             {
@@ -157,12 +149,12 @@ export const FIELDS = {
             },
             {
                 name: 'Дата создания',
-                type: FIELD_TYPES.label,
+                type: FIELD_TYPES.date,
                 route: null
             },
             {
                 name: 'Должник',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.debtors
             },
             {
@@ -182,7 +174,7 @@ export const FIELDS = {
             },
             {
                 name: 'Санкции',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.sanctions
             },
             {
@@ -199,7 +191,7 @@ export const FIELDS = {
         debtor_contract_card: [
             {
                 name: 'Код',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.label,
                 route: null
             },
             {
@@ -209,7 +201,7 @@ export const FIELDS = {
             },
             {
                 name: 'Основание',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.debtor_contracts
             },
             {
@@ -229,22 +221,22 @@ export const FIELDS = {
             },
             {
                 name: 'Валюта',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.currencies
             },
             {
                 name: 'Статья БДДС',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.bdds_notes
             },
             {
                 name: 'Статья бюджета',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.budget_notes
             },
             {
                 name: 'Вид взаиморасчётов',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.settlements
             },
             {
@@ -254,22 +246,22 @@ export const FIELDS = {
             },
             {
                 name: 'Общество',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.societies
             },
             {
                 name: 'Бизнес',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.sides
             },
             {
                 name: 'Вид рынка',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.markets
             },
             {
                 name: 'Категория контрагента',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.counteragents_categories
             },
             {
@@ -289,14 +281,14 @@ export const FIELDS = {
             },
             {
                 name: 'Ответственный',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.users
             },
         ],
         event_card: [
             {
                 name: 'Номер',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.label,
                 route: null
             },
             {
@@ -321,27 +313,27 @@ export const FIELDS = {
             },
             {
                 name: 'Документ основание',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.events
             },
             {
                 name: 'Вид работы',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.work_types
             },
             {
                 name: 'Карточка',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.debtors
             },
             {
                 name: 'Общество',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.societies
             },
             {
                 name: 'Бизнес',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.sides
             },
             {
@@ -356,12 +348,12 @@ export const FIELDS = {
             },
             {
                 name: 'Ответственный',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.users
             },
             {
                 name: 'Статус',
-                type: FIELD_TYPES.text,
+                type: FIELD_TYPES.ref,
                 route: ROUTES.event_states
             }
         ]

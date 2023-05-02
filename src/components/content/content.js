@@ -1,35 +1,18 @@
 import React, {useCallback, useContext, useEffect} from "react";
 import {useLocation} from "react-router-dom";
 
-import Card from "./cards/card";
 import FloatingButton from "./chatbot/floatingButton";
 import ChatBot from "./chatbot/chatBot";
 import {FIELDS, ROUTES} from "../../globalConstants";
 import SettingsForm from "./settings/settingsForm";
 import FullCard from "./cards/FullCard";
 import {appContext} from "../../contexts";
-import {useSelector} from "react-redux";
 import MainPage from "./mainPage/MainPage";
 import {parseDate} from "../../utils";
 
 const Content = (props) => {
     const location = useLocation()
-
     const { chatbot_state, is_mobile_screen, theme } = useContext(appContext)
-
-    const cardsData = useSelector(state => state.cards)
-
-    const getCards = useCallback(() => {
-        const cards = []
-
-        for (let i = 0; i < cardsData.length; ++i) {
-            cards.push(
-                <Card key={ `Card_${i + 1}` } route={ cardsData[i].route } />
-            )
-        }
-
-        return cards
-    }, [cardsData])
 
     const defineCardTemplate = useCallback(() => {
         let cardTemplate = null
@@ -47,26 +30,35 @@ const Content = (props) => {
         return cardTemplate
     }, [location.pathname])
 
+    const { has_param, cards, callback } = props.content_props
+
     let contentData
     if (location.pathname === ROUTES.settings) {
         contentData = <SettingsForm />
     }
     else if (location.pathname === ROUTES.main) {
-        contentData = <MainPage />
+        contentData = <MainPage callback={ callback } />
     }
-    else if (props.has_param) {
+    else if (has_param) {
         contentData = <FullCard template={ defineCardTemplate() } />
     }
     else {
-        contentData = getCards()
+        contentData = callback()
     }
 
     useEffect(() => {
+        const mainPage = document.getElementById('Main-page')
+        if (mainPage !== null) {
+            mainPage.querySelectorAll('p').forEach(text => {
+                text.style.color = theme? '#FFFFFF' : '#212529'
+            })
+        }
+
         let cardCounter = 0
 
-        if (props.has_param) {
+        if (has_param && cards.length != 0) {
             let filterIterator = -1
-            const cardKeys = Object.keys(cardsData[cardCounter]).filter(cardKey => {
+            const cardKeys = Object.keys(cards[cardCounter]).filter(cardKey => {
                 ++filterIterator
                 return !cardKey.includes("id") || (cardKey.includes("id") && filterIterator == 1)
             })
@@ -77,40 +69,39 @@ const Content = (props) => {
                 const input = fullCardItem.querySelector('input, label')
                 const itemKey = cardKeys[keyCounter]
 
-                if (input.type == 'text') {
-                    input.value = cardsData[0][itemKey]
-                }
-                else if (input.type == 'datetime-local') {
-                    input.value = parseDate(new Date(cardsData[0][itemKey] * 1000), true)
+                if (input.type == 'datetime-local') {
+                    input.value = parseDate(new Date(cards[0][itemKey] * 1000), true)
                 }
                 else if (input.type == 'checkbox') {
-                    input.checked = cardsData[0][itemKey]
+                    input.checked = cards[0][itemKey]
                 }
                 else {
-                    input.innerHTML = new Date(cardsData[0][itemKey]).toString() == 'Invalid Date'?
-                        cardsData[0][itemKey]
-                        :
-                        parseDate(new Date(cardsData[0][itemKey] * 1000))
+                    if (input.parentElement.classList.contains('ref-item') || input.type == 'text') {
+                        input.value = cards[0][itemKey]
+                    }
+                    else {
+                        input.innerHTML = cards[0][itemKey]
+                    }
                 }
 
                 ++keyCounter
             })
         }
-        else {
-            let keyOrder = []
-            if (location.pathname.includes(ROUTES.debtors)){
-                keyOrder = [3, 1, 2, 4]
-            }
-            else if (location.pathname.includes(ROUTES.debtor_contracts)) {
-                keyOrder = [5, 1, 2, 4]
-            }
-            else if(location.pathname.includes(ROUTES.events)) {
-                keyOrder = [2, 1, 3, 4]
-            }
-
+        else if (cards.length != 0) {
             document.querySelectorAll('.Card').forEach(card => {
-                const cardKeys = Object.keys(cardsData[cardCounter]).filter(key => {
-                    return ![null, false, true].includes(cardsData[cardCounter][key])
+                let keyOrder = []
+                if (cards[cardCounter].route.includes(ROUTES.debtors)){
+                    keyOrder = [3, 1, 2, 4]
+                }
+                else if (cards[cardCounter].route.includes(ROUTES.debtor_contracts)) {
+                    keyOrder = [5, 1, 2, 4]
+                }
+                else if(cards[cardCounter].route.includes(ROUTES.events)) {
+                    keyOrder = [2, 1, 3, 4]
+                }
+
+                const cardKeys = Object.keys(cards[cardCounter]).filter(key => {
+                    return ![null, false, true].includes(cards[cardCounter][key])
                 })
                 let keyCounter = 0
 
@@ -120,8 +111,8 @@ const Content = (props) => {
                     const itemKey = cardKeys[keyOrder[keyCounter]]
                     const isDate = itemKey.toLowerCase().includes('date')
                     const itemValue = isDate?
-                        parseDate(new Date(cardsData[cardCounter][itemKey] * 1000)) :
-                        cardsData[cardCounter][itemKey]
+                        parseDate(new Date(cards[cardCounter][itemKey] * 1000)) :
+                        cards[cardCounter][itemKey]
 
                     item.innerText = `${item.innerText.split(':\xa0\xa0')[0]}:\xa0\xa0${itemValue}`
 
@@ -131,11 +122,11 @@ const Content = (props) => {
                 ++cardCounter
             })
         }
-    }, [cardsData])
+    }, [cards])
 
     return (
         <div id="Content" className={ `d-flex flex-row flex-wrap w-100 mt-5 mb-5
-        ${ is_mobile_screen? 'pe-0 ps-0 pb-0 pt-5' : 'p-5' }` }>
+        ${ is_mobile_screen? 'pe-0 ps-0 pb-0 pt-5' : 'pt-5' }` }>
             {
                 contentData
             }

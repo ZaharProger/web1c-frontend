@@ -8,6 +8,7 @@
     justify-content: space-around;
     background-color: red;
     border-radius: 0 0 12px 12px;
+    z-index: 10000;
 }
 
 .modal__content {

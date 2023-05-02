@@ -14,13 +14,7 @@ export default function FullCardItem(props) {
     let inputType = null
     switch (data.type) {
         case FIELD_TYPES.text:
-            inputType = data.route === null? <input type="text" className="d-flex ms-0"></input>
-                :
-                <div className="d-flex flex-row">
-                    <input type="text" className="d-flex me-2 ms-0 flex-grow-1"></input>
-                    <i className="d-flex fa-regular fa-ellipsis mt-auto mb-auto p-1"
-                       onClick={ () => redirect(data.route) }/>
-                </div>
+            inputType = <input type="text" className="d-flex ms-0"></input>
             break
         case FIELD_TYPES.date:
             inputType = <input type="datetime-local" className="d-flex ms-0"></input>
@@ -30,6 +24,13 @@ export default function FullCardItem(props) {
             break
         case FIELD_TYPES.label:
             inputType = <label className="d-flex ms-0 mb-0 p-0"></label>
+            break
+        case FIELD_TYPES.ref:
+            inputType = <div className="ref-item d-flex flex-row">
+                            <input type="text" className="d-flex me-3 ms-0 flex-grow-1" disabled={ true }></input>
+                            <i className="d-flex fa-regular fa-ellipsis mt-auto mb-auto p-1"
+                                onClick={ () => redirect(data.route) }/>
+                        </div>
             break
     }
 

@@ -7,7 +7,8 @@ const initialState = {
     chatBotState: false,
     profileData: null,
     mobileMenuState: false,
-    cards: []
+    cards: Array(),
+    prevRoute: null
 }
 
 export default initialState;

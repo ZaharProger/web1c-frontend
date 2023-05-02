@@ -8,6 +8,9 @@ import {useSelector} from "react-redux";
 
 const HeaderNavbar = () => {
     const navItems = useLayout(BUTTONS.navbar)
+    const mainNavItems = navItems.slice(0, navItems.length - 1)
+    const extraNavItems = navItems.slice(navItems.length - 1)
+
     const updateSubMenuState = useRedux(SUBMENU_STATE)
 
     const isDarkTheme = useContext(appContext).theme
@@ -53,8 +56,13 @@ const HeaderNavbar = () => {
 
     return (
         <div id="Header-navbar" className="d-flex flex-row">
+            <div className="d-flex flex-row">
+                {
+                    mainNavItems
+                }
+            </div>
             {
-                navItems
+                extraNavItems
             }
         </div>
     )

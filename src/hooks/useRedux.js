@@ -9,11 +9,12 @@ import {
     MODAL_STATE,
     SUBMENU_STATE,
     CHATBOT_STATE,
-    MOBILE_MENU_STATE, CARDS
+    MOBILE_MENU_STATE, CARDS, PREV_ROUTE
 } from '../state-manager/stateConstants';
 import changeMobileMenuState from "../state-manager/actions/changeMobileMenuState";
 import changeCards from "../state-manager/actions/changeCards";
 import {useCallback} from "react";
+import changePrevRoute from "../state-manager/actions/changePrevRoute";
 
 export default function useRedux(reduxAction){
     const dispatch = useDispatch();
@@ -39,6 +40,10 @@ export default function useRedux(reduxAction){
             break;
         case CARDS:
             callback = (cards) => dispatch(changeCards(cards));
+            break;
+        case PREV_ROUTE:
+            callback = (prevRoute) => dispatch(changePrevRoute(prevRoute));
+            break;
     }
 
     return useCallback(callback, [])

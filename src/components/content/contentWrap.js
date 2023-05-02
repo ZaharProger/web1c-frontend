@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useCallback, useEffect} from "react";
 
 import Header from '../header/Header';
 import Content from "./content";
@@ -9,6 +9,8 @@ import useRedux from "../../hooks/useRedux";
 import {CARDS, MODAL_STATE} from "../../state-manager/stateConstants";
 import {useLocation} from "react-router-dom";
 import useQuery from "../../hooks/useQuery";
+import {useSelector} from "react-redux";
+import Card from "./cards/card";
 
 const ContentWrap = () => {
     const location = useLocation()
@@ -21,14 +23,34 @@ const ContentWrap = () => {
     const updateCards = useRedux(CARDS)
     const updateModalInfo = useRedux(MODAL_STATE)
 
+    const cardsData = useSelector(state => state.cards)
+
+    const getCards = useCallback(() => {
+        const cards = []
+
+        for (let i = 0; cardsData !== null && i < cardsData.length; ++i) {
+            cards.push(
+                <Card key={`Card_${i + 1}`} route={cardsData[i].route}/>
+            )
+        }
+
+        return cards
+    }, [cardsData])
+
     useEffect(() => {
         const task = async () => {
-            let endpoint = `/api${location.pathname}`
+            const isMain = location.pathname === ROUTES.main
+
+            let params = `${API.params.type}=${isMain? 3 : hasParam? 2 : 1}`
             if (hasParam) {
-                endpoint += `?${API.params.key}=${currentParamValue}`
+                params += `&${API.params.key}=${currentParamValue}`
             }
 
-            const response = await performApiCall(endpoint, API.methods.get)
+            const response = await performApiCall(
+                `/api${isMain? ROUTES.history : location.pathname}?${params}`,
+                API.methods.get
+            )
+
             return response.ok?
                 () => updateCards(response.responseBody.data)
                 :
@@ -38,14 +60,18 @@ const ContentWrap = () => {
                 })
         }
 
-        if (location.pathname !== ROUTES.main && location.pathname !== ROUTES.settings) {
+        if (location.pathname !== ROUTES.settings) {
             task().then((callback) => callback())
         }
     }, [location.pathname, hasParam])
 
     return (
         <div id="Content-wrap" className="d-flex flex-column w-100">
-            <Content has_param={ hasParam } />
+            <Content content_props={{
+                has_param: hasParam,
+                cards: cardsData,
+                callback: () => getCards()
+            }} />
             <Footer />
             <Header />
         </div>

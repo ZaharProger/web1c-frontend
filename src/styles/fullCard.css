@@ -70,6 +70,7 @@
 .Full-card-item > input[type='datetime-local'] {
     min-width: 220px;
     width: 20%;
+    cursor: text;
 }
 
 .Full-card-item > input[type='text'] {

@@ -11,7 +11,7 @@ const Header = () => {
     const { is_mobile_screen, mobile_menu_state } = useContext(appContext)
 
     return (
-        <div id="Header" className="d-flex flex-row pt-2 pe-2 ps-2 pb-5 w-100">
+        <div id="Header" className="d-flex flex-row pt-2 pb-5 w-100">
             {
                 mobile_menu_state?
                     <HeaderNavbar />
