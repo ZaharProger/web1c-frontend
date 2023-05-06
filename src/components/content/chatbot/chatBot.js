@@ -1,9 +1,10 @@
 import {useContext, useEffect} from "react";
 import "../../../styles/chatBot.css"
-import MessageBox from "./messageBox";
+import SendMessageBox from "./sendMessageBox";
 import ChatBotHeader from "./chatBotHeader";
 import {appContext} from "../../../contexts";
 import {useLocation} from "react-router-dom";
+import ChatBotContent from "./ChatBotContent";
 
 const ChatBot = () => {
     const location = useLocation()
@@ -20,7 +21,8 @@ const ChatBot = () => {
     return (
         <div id="ChatBot" className="d-flex flex-column">
             <ChatBotHeader />
-            <MessageBox />
+            <ChatBotContent />
+            <SendMessageBox />
         </div>
     )
 }

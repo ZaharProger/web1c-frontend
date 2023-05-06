@@ -41,4 +41,12 @@
     .sign-out-item {
         margin-left: 60px;
     }
+
+    #ChatBot {
+        width: 100%;
+        border-radius: 0;
+        inset-inline: auto;
+        inset-block: 0;
+        height: 100%;
+    }
 }

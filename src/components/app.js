@@ -45,14 +45,15 @@ export default function App() {
     }
 
     useEffect(() => {
-        document.querySelectorAll('body, #Header').forEach(container => {
-            if (container.id != 'Header') {
-                container.style.background = contextData.theme? '#212529' : '#FFFFFF'
-            }
-            else {
-                container.style.background =
-                    `linear-gradient(${contextData.theme? '#212529' : '#FFFFFF'} 60%, transparent)`
-            }
+        document.querySelectorAll('body, #Header')
+            .forEach(container => {
+                if (container.id === '') {
+                    container.style.background = contextData.theme? '#212529' : '#FFFFFF'
+                }
+                else {
+                    container.style.background =
+                        `linear-gradient(${contextData.theme? '#212529' : '#FFFFFF'} 60%, transparent)`
+                }
         })
 
         document.querySelectorAll('span, input, p, label').forEach(text => {

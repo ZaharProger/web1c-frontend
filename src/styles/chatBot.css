@@ -5,7 +5,7 @@
     border: 2px solid #FD9330;
     border-radius: 2em;
     opacity: 0;
-    overflow-y: auto;
+    overflow: hidden;
     inset-block: auto 5vmin;
     inset-inline: auto 5vmin;
     animation: chatbot-reveal 0.3s ease-out 0s 1 forwards;
@@ -47,4 +47,47 @@
 
 .close {
     display: none;
+}
+
+#Chat-bot-content {
+    overflow-y: auto;
+    scrollbar-color: radial-gradient(#FD9330, transparent) transparent;
+    scrollbar-width: thin;
+}
+
+#Chat-bot-content::-webkit-scrollbar{
+    width: 3px;
+    height: 3px;
+    background-color: transparent;
+}
+
+#Chat-bot-content::-webkit-scrollbar-thumb{
+    background: radial-gradient(#FD9330, transparent);
+}
+
+#Chat-bot-content::-webkit-scrollbar-corner{
+    background-color: transparent;
+}
+
+.Send-message-box {
+    position: fixed;
+    margin-top: auto;
+}
+
+.Message-box {
+    border: 1px solid #FD9330;
+    border-radius: 20px;
+    background-color: transparent;
+}
+
+.Message-box > span {
+    font-size: 0.7em;
+}
+
+.Message-box > span:last-child {
+    font-size: 0.9em;
+}
+
+.bot-answer {
+    background-color: #FD9330!important;
 }

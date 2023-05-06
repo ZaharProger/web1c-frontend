@@ -1,6 +1,6 @@
 #Header {
     position: fixed;
-    animation: header-reveal 1s ease-out 0s 1 forwards;
+    animation: header-reveal 0.5s ease-out 0s 1 forwards;
 }
 
 #Header > i {

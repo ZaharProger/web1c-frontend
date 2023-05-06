@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback, useContext, useEffect} from "react";
 
 import Header from '../header/Header';
 import Content from "./content";
@@ -11,6 +11,7 @@ import {useLocation} from "react-router-dom";
 import useQuery from "../../hooks/useQuery";
 import {useSelector} from "react-redux";
 import Card from "./cards/card";
+import {appContext} from "../../contexts";
 
 const ContentWrap = () => {
     const location = useLocation()
@@ -19,6 +20,8 @@ const ContentWrap = () => {
 
     const currentParamValue = query.get("Key")
     const hasParam = currentParamValue !== null
+
+    const { chatbot_state, is_mobile_screen } = useContext(appContext)
 
     const updateCards = useRedux(CARDS)
     const updateModalInfo = useRedux(MODAL_STATE)
@@ -73,7 +76,9 @@ const ContentWrap = () => {
                 callback: () => getCards()
             }} />
             <Footer />
-            <Header />
+            {
+                chatbot_state && is_mobile_screen? null : <Header />
+            }
         </div>
     );
 }

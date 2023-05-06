@@ -34,7 +34,7 @@ export default function MainPage(props) {
                         <p className="d-flex me-auto mt-2 ms-4 mb-1 text-center">
                             Просмотрено ранее
                         </p>
-                        <div className="history-list d-flex flex-row pe-2 ps-2">
+                        <div className="history-list d-flex flex-row pe-2 ps-2 flex-wrap">
                             {
                                 cards
                             }
