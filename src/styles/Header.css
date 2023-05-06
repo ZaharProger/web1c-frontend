@@ -98,3 +98,32 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
         opacity: 1;
     }
 }
+
+#Search-help-message {
+    position: fixed;
+    border-radius: 20px;
+    border: 2px solid #FD9330;
+    background-color: #FD9330;
+    inset-block: auto 0;
+    top: 60px;
+    max-width: 600px;
+    height: 100px;
+    opacity: 0;
+    animation: help-message-reveal 0.45s ease-out 0s 1 forwards;
+}
+
+#Search-help-message > span {
+    font-size: 0.9em;
+    color: white;
+}
+
+@keyframes help-message-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

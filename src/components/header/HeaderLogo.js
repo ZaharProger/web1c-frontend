@@ -6,13 +6,14 @@ import {useLocation} from "react-router-dom";
 import useApi from "../../hooks/useApi";
 import useRedux from "../../hooks/useRedux";
 import {CARDS, MODAL_STATE} from "../../state-manager/stateConstants";
+import SearchHelpMessage from "./SearchHelpMessage";
 
 const HeaderLogo = () => {
     const location = useLocation()
     const redirect = useRedirection()
 
     const { theme, is_mobile_screen } = useContext(appContext)
-    const [isSearchFocused, changeSearchFocused] = useState(true)
+    const [isMessageActive, changeMessageActive] = useState(false)
 
     const performApiCall = useApi()
     const updateModalInfo = useRedux(MODAL_STATE)
@@ -40,12 +41,21 @@ const HeaderLogo = () => {
 
     useEffect(() => {
         const searchField = document.getElementById('Header-logo').querySelector('input')
+
         if (searchField !== null) {
-            searchField.onfocus = () => changeSearchFocused(true)
-            searchField.onblur = () => changeSearchFocused(false)
+            searchField.onfocus = () => {
+                searchField.classList.add('focused')
+                changeMessageActive(true)
+            }
+            searchField.onblur = () => {
+                searchField.classList.remove('focused')
+                changeMessageActive(false)
+            }
 
             searchField.onkeydown = async (e) => {
-                if (isSearchFocused && e.code == 'Enter') {
+                if (searchField.classList.contains('focused') && e.key == 'Enter') {
+                    changeMessageActive(false)
+
                     let params = `${API.params.type}=${searchField.value == ''? 1 : 4}`
                     if (searchField.value != '') {
                         params += `&${API.params.key}=${searchField.value.trim()}`
@@ -54,7 +64,7 @@ const HeaderLogo = () => {
                     const { ok, responseBody } = await performApiCall(
                         `/api/${location.pathname}?${params}`,
                         API.methods.get
-                    );
+                    )
 
                     if (ok) {
                         updateCards(responseBody.data)
@@ -80,6 +90,9 @@ const HeaderLogo = () => {
                     :
                     <input type="text" placeholder=" &#xf002; Поиск"
                            className="search fontAwesome d-flex mt-auto mb-auto ms-5 w-50"></input>
+            }
+            {
+                isMessageActive? <SearchHelpMessage /> : null
             }
         </div>
     )
