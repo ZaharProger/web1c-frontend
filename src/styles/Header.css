@@ -107,7 +107,7 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
     inset-block: auto 0;
     top: 60px;
     max-width: 600px;
-    height: 100px;
+    height: 150px;
     opacity: 0;
     animation: help-message-reveal 0.45s ease-out 0s 1 forwards;
 }
