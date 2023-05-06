@@ -1,33 +1,12 @@
-import React, {useCallback} from "react";
+import React from "react";
 
 import '../../../styles/mainPage.css';
 
 export default function MainPage(props) {
-    const getGreeting = useCallback(() => {
-        const currentHours = new Date().getHours()
-        let greeting
-
-        if (currentHours >= 5 && currentHours <= 11) {
-            greeting = 'Доброе утро!'
-        }
-        else if (currentHours >= 12 && currentHours <= 16) {
-            greeting = 'Добрый день!'
-        }
-        else if (currentHours >= 17 && currentHours <= 23) {
-            greeting = 'Добрый вечер!'
-        }
-        else {
-            greeting = 'Доброй ночи!'
-        }
-
-        return greeting
-    }, [])
-
     const cards = props.callback()
 
     return(
         <div id="Main-page" className="d-flex flex-column m-auto w-100">
-            <span className="d-flex me-auto ms-auto text-center mb-5">{ getGreeting() }</span>
             {
                 cards.length != 0?
                     <>

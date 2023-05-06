@@ -9,6 +9,7 @@ import FullCard from "./cards/FullCard";
 import {appContext} from "../../contexts";
 import MainPage from "./mainPage/MainPage";
 import {parseDate} from "../../utils";
+import EmptyListMessage from "./EmptyListMessage";
 
 const Content = (props) => {
     const location = useLocation()
@@ -43,7 +44,8 @@ const Content = (props) => {
         contentData = <FullCard template={ defineCardTemplate() } />
     }
     else {
-        contentData = callback()
+        const cards = callback()
+        contentData = cards.length == 0? <EmptyListMessage /> : cards
     }
 
     useEffect(() => {
@@ -52,6 +54,10 @@ const Content = (props) => {
             mainPage.querySelectorAll('p').forEach(text => {
                 text.style.color = theme? '#FFFFFF' : '#212529'
             })
+        }
+        const emptyListMessage = document.getElementById('Empty-list-message')
+        if (emptyListMessage !== null) {
+            emptyListMessage.querySelector('span').style.color = theme? '#FFFFFF' : '#212529'
         }
 
         let cardCounter = 0

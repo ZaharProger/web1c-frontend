@@ -9,7 +9,6 @@ import useRedux from "../../hooks/useRedux";
 import {CARDS, MODAL_STATE} from "../../state-manager/stateConstants";
 import {useLocation} from "react-router-dom";
 import useQuery from "../../hooks/useQuery";
-import {useSelector} from "react-redux";
 import Card from "./cards/card";
 import {appContext} from "../../contexts";
 
@@ -21,12 +20,10 @@ const ContentWrap = () => {
     const currentParamValue = query.get("Key")
     const hasParam = currentParamValue !== null
 
-    const { chatbot_state, is_mobile_screen } = useContext(appContext)
+    const { chatbot_state, is_mobile_screen, cards: cardsData } = useContext(appContext)
 
     const updateCards = useRedux(CARDS)
     const updateModalInfo = useRedux(MODAL_STATE)
-
-    const cardsData = useSelector(state => state.cards)
 
     const getCards = useCallback(() => {
         const cards = []

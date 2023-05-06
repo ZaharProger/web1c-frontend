@@ -9,6 +9,11 @@
     cursor: pointer;
 }
 
+#Header-logo > span {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
 #Header-navbar {
     margin: auto 36px auto auto;
 }

@@ -21,10 +21,6 @@ div > label:not(:first-child) {
     border-radius: 0 0 0 10px;
 }
 
-/* input {
-    padding-left: 8px;
-    color: white;
-    border: 1px solid white;
-    background-color: transparent;
-    border-radius: .4em;
-} */
+#Empty-list-message > i {
+    font-size: 2.5em;
+}

@@ -25,6 +25,7 @@ export default function App() {
     const {isActive, message} = useSelector(state => state.modalState)
     const currentChatBotState = useSelector(state => state.chatBotState)
     const mobileMenuState = useSelector(state => state.mobileMenuState)
+    const cardsData = useSelector(state => state.cards)
 
     if (localStorage.getItem(LOCAL_STORAGE_KEYS.theme) === null) {
         localStorage.setItem(LOCAL_STORAGE_KEYS.theme, THEME.dark)
@@ -34,7 +35,8 @@ export default function App() {
         theme: localStorage.getItem(LOCAL_STORAGE_KEYS.theme) === THEME.dark,
         is_mobile_screen: isMobileScreen,
         chatbot_state: currentChatBotState,
-        mobile_menu_state: mobileMenuState
+        mobile_menu_state: mobileMenuState,
+        cards: cardsData
     }
 
     window.onresize = () => {
@@ -66,7 +68,10 @@ export default function App() {
         })
 
         document.querySelectorAll('i').forEach(icon => {
-            if (!icon.parentElement.classList.contains('Navbar-list-item') && icon.parentElement.id !== 'Main-page') {
+            const isClickable = !icon.parentElement.classList.contains('Navbar-list-item') &&
+                !['Main-page', 'Empty-list-message'].includes(icon.parentElement.id)
+
+            if (isClickable) {
                 if (icon.classList.contains('fa-bars') || icon.classList.contains('fa-magnifying-glass')) {
                     icon.classList.replace(mobileMenuState ? 'fa-bars' : 'fa-magnifying-glass',
                         mobileMenuState ? 'fa-magnifying-glass' : 'fa-bars')
@@ -87,7 +92,7 @@ export default function App() {
                     icon.style.transform = 'scale(1)'
                 }
             }
-            else if (icon.parentElement.id === 'Main-page') {
+            else if (['Main-page', 'Empty-list-message'].includes(icon.parentElement.id)) {
                 icon.style.color = '#FD9330'
             }
             else {
@@ -111,7 +116,7 @@ export default function App() {
                 }
             })
         }
-    }, [location, isMobileScreen, currentChatBotState, mobileMenuState])
+    }, [location, isMobileScreen, currentChatBotState, mobileMenuState, cardsData])
 
     return (
         <appContext.Provider value={ contextData }>
