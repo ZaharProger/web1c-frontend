@@ -32,7 +32,7 @@ export default function ProtectedRoutes() {
     }, [])
 
     const isLogged = useSelector(state => state.profileData) != null
-    const isLocationAuth = location.pathname === ROUTES.auth;
+    const isLocationAuth = location.pathname === ROUTES.auth || location.pathname === ROUTES.register;
 
     useEffect(() => {
         window.scrollTo(0, 0);

@@ -7,9 +7,12 @@ import useApi from "../../hooks/useApi";
 import useRedux from "../../hooks/useRedux";
 import {CARDS, MODAL_STATE} from "../../state-manager/stateConstants";
 import SearchHelpMessage from "./SearchHelpMessage";
+import useQuery from "../../hooks/useQuery";
+import {useSelector} from "react-redux";
 
 const HeaderLogo = () => {
     const location = useLocation()
+    const query = useQuery()
     const redirect = useRedirection()
 
     const { theme, is_mobile_screen } = useContext(appContext)
@@ -19,24 +22,25 @@ const HeaderLogo = () => {
     const updateModalInfo = useRedux(MODAL_STATE)
     const updateCards = useRedux(CARDS)
 
+    const profileData = useSelector(state => state.profileData)
     const getGreeting = useCallback(() => {
         const currentHours = new Date().getHours()
         let greeting
 
         if (currentHours >= 5 && currentHours <= 11) {
-            greeting = 'Доброе утро!'
+            greeting = 'Доброе утро'
         }
         else if (currentHours >= 12 && currentHours <= 16) {
-            greeting = 'Добрый день!'
+            greeting = 'Добрый день'
         }
         else if (currentHours >= 17 && currentHours <= 23) {
-            greeting = 'Добрый вечер!'
+            greeting = 'Добрый вечер'
         }
         else {
-            greeting = 'Доброй ночи!'
+            greeting = 'Доброй ночи'
         }
 
-        return greeting
+        return `${greeting}, ${profileData.en_user_login}!`
     }, [])
 
     useEffect(() => {
@@ -56,7 +60,7 @@ const HeaderLogo = () => {
                 if (searchField.classList.contains('focused') && e.key == 'Enter') {
                     changeMessageActive(false)
 
-                    let params = `${API.params.type}=${searchField.value == ''? 1 : 4}`
+                    let params = `${API.params.type}=${searchField.value == ''? 1 : 3}`
                     if (searchField.value != '') {
                         params += `&${API.params.key}=${searchField.value.trim()}`
                     }
@@ -85,7 +89,8 @@ const HeaderLogo = () => {
             <img className="logo-nav d-flex" src={`/pics/enplus_2005_${theme? 'dark' : 'light'}.svg`}
                  onClick={ () => redirect(ROUTES.main) } alt="company logo"></img>
             {
-                [ROUTES.main, ROUTES.settings].includes(location.pathname)?
+                [ROUTES.main, ROUTES.settings].includes(location.pathname) ||
+                query.get("Key") !== null?
                     <span className="d-flex me-auto ms-5 mt-auto mb-auto text-center">{ getGreeting() }</span>
                     :
                     <input type="text" placeholder=" &#xf002; Поиск"

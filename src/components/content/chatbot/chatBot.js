@@ -16,7 +16,7 @@ const ChatBot = () => {
 
         chatBot.querySelectorAll('input, span').forEach(text =>
             text.style.color = isDarkTheme? '#FFFFFF' : '#212529')
-    }, [location])
+    }, [location.pathname])
 
     return (
         <div id="ChatBot" className="d-flex flex-column">

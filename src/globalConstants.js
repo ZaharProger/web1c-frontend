@@ -1,6 +1,7 @@
 export const ROUTES = {
     main: '/',
     auth: '/auth',
+    register: '/register',
     notFound: '/*',
     classes: '/classes',
     documents: '/docs',
@@ -43,6 +44,10 @@ export const VALIDATION_CASES = {
         predicate: (input, firstInput) => input.value != firstInput.value && input.type == 'password',
         messageIfError: 'Пароли не совпадают!'
     },
+    passwordLength: {
+        predicate: (input) => input.value.length < 8 && input.type == 'password',
+        messageIfError: 'Длина пароля должна быть не менее 8 символов!'
+    },
     extraSymbols: {
         predicate: (input) => input.value.match((/[\s!~\\/#$@^&?*()+={}[\],.<>:;"'`]+/)) != null &&
             input.type != 'password',
@@ -82,21 +87,6 @@ export const BUTTONS = {
             ]
         },
         {
-            icon: 'file',
-            caption: 'Документы',
-            route: ROUTES.documents,
-            sub_items: [
-                {
-                    caption: 'Записи событий',
-                    route: ROUTES.documents + ROUTES.events
-                },
-                {
-                    caption: 'Договоры должников',
-                    route: ROUTES.documents + ROUTES.debtor_contracts
-                }
-            ]
-        },
-        {
             icon: 'gear',
             caption: 'Настройки',
             route: ROUTES.settings,
@@ -114,6 +104,21 @@ export const BUTTONS = {
             caption: 'Назад',
             route: null,
             sub_items: []
+        },
+        {
+            caption: 'Основное',
+            route: null,
+            sub_items: []
+        },
+        {
+            caption: 'Договоры должника',
+            route: null,
+            sub_items: []
+        },
+        {
+            caption: 'Мероприятия должника',
+            route: null,
+            sub_items: []
         }
     ]
 }
@@ -121,10 +126,8 @@ export const BUTTONS = {
 export const FIELD_TYPES = {
     flag: 0,
     text: 1,
-    radio: 2,
-    date: 3,
-    label: 4,
-    ref: 5
+    date: 2,
+    label: 3
 }
 
 export const FIELDS = {
@@ -154,7 +157,7 @@ export const FIELDS = {
             },
             {
                 name: 'Должник',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.debtors
             },
             {
@@ -174,7 +177,7 @@ export const FIELDS = {
             },
             {
                 name: 'Санкции',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.sanctions
             },
             {
@@ -201,7 +204,7 @@ export const FIELDS = {
             },
             {
                 name: 'Основание',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.debtor_contracts
             },
             {
@@ -221,22 +224,22 @@ export const FIELDS = {
             },
             {
                 name: 'Валюта',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.currencies
             },
             {
                 name: 'Статья БДДС',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.bdds_notes
             },
             {
                 name: 'Статья бюджета',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.budget_notes
             },
             {
                 name: 'Вид взаиморасчётов',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.settlements
             },
             {
@@ -246,22 +249,22 @@ export const FIELDS = {
             },
             {
                 name: 'Общество',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.societies
             },
             {
                 name: 'Бизнес',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.sides
             },
             {
                 name: 'Вид рынка',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.markets
             },
             {
                 name: 'Категория контрагента',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.counteragents_categories
             },
             {
@@ -281,7 +284,7 @@ export const FIELDS = {
             },
             {
                 name: 'Ответственный',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.users
             },
         ],
@@ -313,27 +316,27 @@ export const FIELDS = {
             },
             {
                 name: 'Документ основание',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.events
             },
             {
                 name: 'Вид работы',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.work_types
             },
             {
                 name: 'Карточка',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.debtors
             },
             {
                 name: 'Общество',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.societies
             },
             {
                 name: 'Бизнес',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.sides
             },
             {
@@ -348,12 +351,12 @@ export const FIELDS = {
             },
             {
                 name: 'Ответственный',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.users
             },
             {
                 name: 'Статус',
-                type: FIELD_TYPES.ref,
+                type: FIELD_TYPES.text,
                 route: ROUTES.event_states
             }
         ]
@@ -374,8 +377,7 @@ export const FIELDS = {
         event_card_short: [
             'Дата создания',
             'Номер',
-            'Вид работы',
-            'Карточка'
+            'Наименование'
         ]
     }
 }

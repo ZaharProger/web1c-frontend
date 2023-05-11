@@ -10,6 +10,7 @@
     border-radius: 8em 2em 8em 2em;
 }
 .info input {
+    display: flex;
     margin: 0 20px 40px 20px;
     font-size: 21px;
     background: white;
@@ -18,35 +19,28 @@
     outline: none;
 }
 .info button {
-    margin: 60px auto 10px;
-    padding: 10px 80px;
+    display: flex;
+    justify-content: center;
+    margin: 30px 20px 30px 20px;
+    padding: 10px 60px;
     border: 2px solid #FD9330;
     border-radius: 2em;
     font-size: 27px;
     color: #FD9330;
     background-color: transparent;
-    transition: 0.3s;
+    transition: 0.3s ease-out;
 }
 .info button:hover {
     color: white;
     background-color: #FD9330;
 }
 
-@media screen and (max-width: 500px) {
-    #AuthenticationWrap {
-        width: 350px;
-    }
-}
-@media screen and (max-width: 350px) {
-    #AuthenticationWrap {
-        width: 280px;
-    }
-}
-@media screen and (max-height: 650px) {
-    .info button {
-        margin-top: 15px;
-    }
-    .logo {
-        margin-bottom: 10px;
-    }
+#reg-button {
+    display: flex;
+    padding: 0;
+    margin: auto auto 10px auto;
+    border: none;
+    background-color: transparent;
+    font-size: 1em;
+    transition: 0.3s ease-out;
 }

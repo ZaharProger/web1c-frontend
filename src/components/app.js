@@ -115,8 +115,16 @@ export default function App() {
                     field.style.boxShadow = 'none'
                 }
             })
+
+            auth.querySelectorAll('button').forEach(button => {
+                if (button.id == 'reg-button') {
+                    button.style.color = contextData.theme? '#FFFFFF' : '#212529'
+                    button.onmouseover = () => button.style.color = '#FD9330'
+                    button.onmouseleave = () => button.style.color = contextData.theme? '#FFFFFF' : '#212529'
+                }
+            })
         }
-    }, [location, isMobileScreen, currentChatBotState, mobileMenuState, cardsData])
+    }, [location.pathname, isMobileScreen, currentChatBotState, mobileMenuState, cardsData])
 
     return (
         <appContext.Provider value={ contextData }>
@@ -128,10 +136,9 @@ export default function App() {
                     <Route element={<ProtectedRoutes />}>
                         <Route path={ROUTES.main} element={<ContentWrap />} />
                         <Route path={ROUTES.auth} element={<AuthenticationWrap />} />
+                        <Route path={ROUTES.register} element={<AuthenticationWrap />} />
                         <Route path={ROUTES.settings} element={<ContentWrap />} />
                         <Route path={`${ROUTES.classes}${ROUTES.debtors}`} element={<ContentWrap />} />
-                        <Route path={`${ROUTES.documents}${ROUTES.debtor_contracts}`} element={<ContentWrap />} />
-                        <Route path={`${ROUTES.documents}${ROUTES.events}`} element={<ContentWrap />} />
                         <Route path={`${ROUTES.classes}${ROUTES.debtors}?Key=:id`} element={<ContentWrap />} />
                         <Route path={`${ROUTES.documents}${ROUTES.debtor_contracts}?Key=:id`} element={<ContentWrap />} />
                         <Route path={`${ROUTES.documents}${ROUTES.events}?Key=:id`} element={<ContentWrap />} />

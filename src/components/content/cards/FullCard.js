@@ -13,13 +13,14 @@ export default function FullCard(props) {
 
     useEffect(() => {
         document.querySelector('.full-card-buttons')
-            .querySelectorAll('span').forEach(cardButton => {
-            cardButton.onmouseover = () => {
-                cardButton.style.color = '#FD9330'
-            }
-            cardButton.onmouseleave = () => {
-                cardButton.style.color = isDarkTheme? '#FFFFFF' : '#212529'
-            }
+            .querySelectorAll('button').forEach(cardButton => {
+                cardButton.onclick = () => {
+                    document.querySelector('.full-card-buttons')
+                        .querySelectorAll('button').forEach( button => {
+                        button.classList.remove('clicked')
+                    })
+                    cardButton.classList.add('clicked')
+                }
         })
 
         document.querySelector('.full-card-fields')

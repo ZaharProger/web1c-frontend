@@ -7,8 +7,10 @@ import useApi from '../../hooks/useApi';
 import useRedux from '../../hooks/useRedux';
 import { VALIDATION_CASES, ROUTES, API, SERVER_ERROR_MESSAGE, AWAIT_BUTTON_TEXT } from '../../globalConstants';
 import { MODAL_STATE } from '../../state-manager/stateConstants';
+import {useLocation} from "react-router-dom";
 
 export default function AuthenticationWrap() {
+    const location = useLocation()
     const redirect = useRedirection();
     const performApiCall = useApi();
     const { validate, update } = useValidation();
@@ -20,6 +22,9 @@ export default function AuthenticationWrap() {
         const formButton = authForm.querySelector('button');
 
         formInputs.forEach(input => {
+            input.classList.remove('incorrect')
+            input.value = ""
+
             input.oninput = () => {
                 update(formInputs, Array.from(document.getElementsByClassName('incorrect'))
                     .filter(errorInput => errorInput !== input));
@@ -37,6 +42,12 @@ export default function AuthenticationWrap() {
             const validationResults = [];
             validationResults.push(validate(formInputs, VALIDATION_CASES.emptyFields));
             validationResults.push(validate(formInputs, VALIDATION_CASES.extraSymbols));
+            if (location.pathname === ROUTES.register) {
+                validationResults.push(validate(formInputs
+                    .filter(input => input.type == 'password'), VALIDATION_CASES.passwordLength))
+                validationResults.push(validate(formInputs
+                    .filter(input => input.type == 'password'), VALIDATION_CASES.passwordMismatch))
+            }
             const firstFailedCase = validationResults.find(validationResult => validationResult.message != '');
             
             let message;
@@ -47,7 +58,7 @@ export default function AuthenticationWrap() {
 
             if (firstFailedCase === undefined) {
                 const formData = new FormData(authForm);
-                formData.append(API.params.requestType, 0);
+                formData.append(API.params.requestType, location.pathname === ROUTES.register? 1 : 0);
                 
                 const { ok, responseBody } = await performApiCall('/api/Users', API.methods.post, formData);
                 message = ok? responseBody.message : SERVER_ERROR_MESSAGE;
@@ -73,7 +84,7 @@ export default function AuthenticationWrap() {
                 redirect(ROUTES.main);
             }
         }
-    }, [])
+    }, [location.pathname])
 
     return(
         <div id="AuthenticationWrap" className="d-flex flex-column">         

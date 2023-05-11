@@ -23,6 +23,12 @@
     padding: 5px 10px;
 }
 
+.clicked {
+    color: white!important;
+    background-color: #FD9330!important;
+    border-color: transparent!important;
+}
+
 .full-card-buttons > button:hover {
     color: white;
     background-color: #FD9330;

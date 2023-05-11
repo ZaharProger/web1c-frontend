@@ -59,7 +59,7 @@ export function useLayout(template) {
         }
         else if (template === BUTTONS.full_card) {
             const key = `Full-card-button_${i}`
-            const buttonClass = `d-flex me-${i == template.length - 1? '0' : '5'}`
+            const buttonClass = `${i == 1? 'clicked ' : ''}d-flex me-${i == template.length - 1? '0' : '5'}`
 
             layoutItems.push(<button key={ key } className={ buttonClass }
                                    onClick={ () => redirect(prevRoute, false) }>{ template[i].caption }</button>)
