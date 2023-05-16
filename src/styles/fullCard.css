@@ -6,10 +6,8 @@
 }
 
 .Full-card {
-    animation: full-card-appearing 1s ease-out 0s 1 forwards;
     width: 800px;
-    margin-right: auto;
-    margin-left: auto;
+    animation: full-card-appearing 1s ease-out 0s 1 forwards;
 }
 
 .full-card-buttons > button {

@@ -1,3 +1,5 @@
+import {FULL_CARD_MODES} from "../globalConstants";
+
 const initialState = {
     modalState: {
         isActive: false,
@@ -8,7 +10,10 @@ const initialState = {
     profileData: null,
     mobileMenuState: false,
     cards: Array(),
-    prevRoute: null
+    relatedEvents: Array(),
+    relatedAgreements: Array(),
+    refreshFlag: false,
+    fullCardMode: FULL_CARD_MODES.main
 }
 
 export default initialState;

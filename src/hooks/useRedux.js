@@ -9,12 +9,15 @@ import {
     MODAL_STATE,
     SUBMENU_STATE,
     CHATBOT_STATE,
-    MOBILE_MENU_STATE, CARDS, PREV_ROUTE
+    MOBILE_MENU_STATE, CARDS, RELATED_EVENTS, RELATED_AGREEMENTS, REFRESH_FLAG, FULL_CARD_MODE
 } from '../state-manager/stateConstants';
 import changeMobileMenuState from "../state-manager/actions/changeMobileMenuState";
 import changeCards from "../state-manager/actions/changeCards";
 import {useCallback} from "react";
-import changePrevRoute from "../state-manager/actions/changePrevRoute";
+import changeRelatedEvents from "../state-manager/actions/changeRelatedEvents";
+import changeRelatedAgreements from "../state-manager/actions/changeRelatedAgreements";
+import changeRefreshFlag from "../state-manager/actions/changeRefreshFlag";
+import changeFullCardMode from "../state-manager/actions/changeFullCardMode";
 
 export default function useRedux(reduxAction){
     const dispatch = useDispatch();
@@ -41,8 +44,17 @@ export default function useRedux(reduxAction){
         case CARDS:
             callback = (cards) => dispatch(changeCards(cards));
             break;
-        case PREV_ROUTE:
-            callback = (prevRoute) => dispatch(changePrevRoute(prevRoute));
+        case RELATED_EVENTS:
+            callback = (events) => dispatch(changeRelatedEvents(events));
+            break;
+        case RELATED_AGREEMENTS:
+            callback = (agreements) => dispatch(changeRelatedAgreements(agreements));
+            break;
+        case REFRESH_FLAG:
+            callback = (refreshFlag) => dispatch(changeRefreshFlag(refreshFlag));
+            break;
+        case FULL_CARD_MODE:
+            callback = (fullCardMode) => dispatch(changeFullCardMode(fullCardMode));
             break;
     }
 

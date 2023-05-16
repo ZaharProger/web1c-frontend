@@ -5,8 +5,7 @@ import {
     SUBMENU_STATE,
     CHATBOT_STATE,
     MOBILE_MENU_STATE,
-    CARDS,
-    PREV_ROUTE
+    CARDS, RELATED_EVENTS, RELATED_AGREEMENTS, REFRESH_FLAG, FULL_CARD_MODE
 } from './stateConstants';
 
 const changeState = (state=initialState, action) => {
@@ -41,10 +40,25 @@ const changeState = (state=initialState, action) => {
                 ...state,
                 cards: action.cards
             }
-        case PREV_ROUTE:
+        case RELATED_EVENTS:
             return {
                 ...state,
-                prevRoute: action.prevRoute
+                relatedEvents: action.relatedEvents
+            }
+        case RELATED_AGREEMENTS:
+            return {
+                ...state,
+                relatedAgreements: action.relatedAgreements
+            }
+        case REFRESH_FLAG:
+            return {
+                ...state,
+                refreshFlag: action.refreshFlag
+            }
+        case FULL_CARD_MODE:
+            return {
+                ...state,
+                fullCardMode: action.fullCardMode
             }
         default:
             return state;

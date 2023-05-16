@@ -13,6 +13,20 @@
         background-color: transparent;
     }
 
+    .full-card-buttons::-webkit-scrollbar{
+        width: 3px;
+        height: 3px;
+        background-color: transparent;
+    }
+
+    .full-card-buttons::-webkit-scrollbar-thumb{
+        background: radial-gradient(#FD9330, transparent);
+    }
+
+    .full-card-buttons::-webkit-scrollbar-corner{
+        background-color: transparent;
+    }
+
     .Full-card {
         width: 100%;
         padding-right: 5px;
@@ -30,6 +44,10 @@
     }
 
     .full-card-buttons {
+        overflow-x: auto;
+        width: 600px;
+        scrollbar-color: radial-gradient(#FD9330, transparent) transparent;
+        scrollbar-width: thin;
         margin-left: auto;
         margin-right: auto;
     }
@@ -52,6 +70,11 @@
 }
 
 @media screen and (max-width: 500px) {
+    .full-card-buttons {
+        padding-right: 20px;
+        width: 360px;
+    }
+
     #AuthenticationWrap {
         width: 350px;
     }

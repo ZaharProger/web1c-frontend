@@ -26,6 +26,7 @@ export default function App() {
     const currentChatBotState = useSelector(state => state.chatBotState)
     const mobileMenuState = useSelector(state => state.mobileMenuState)
     const cardsData = useSelector(state => state.cards)
+    const fullCardMode = useSelector(state => state.fullCardMode)
 
     if (localStorage.getItem(LOCAL_STORAGE_KEYS.theme) === null) {
         localStorage.setItem(LOCAL_STORAGE_KEYS.theme, THEME.dark)
@@ -36,7 +37,8 @@ export default function App() {
         is_mobile_screen: isMobileScreen,
         chatbot_state: currentChatBotState,
         mobile_menu_state: mobileMenuState,
-        cards: cardsData
+        cards: cardsData,
+        full_card_mode: fullCardMode
     }
 
     window.onresize = () => {
@@ -124,7 +126,7 @@ export default function App() {
                 }
             })
         }
-    }, [location.pathname, isMobileScreen, currentChatBotState, mobileMenuState, cardsData])
+    }, [location.pathname, isMobileScreen, currentChatBotState, mobileMenuState, cardsData, fullCardMode])
 
     return (
         <appContext.Provider value={ contextData }>
@@ -139,9 +141,9 @@ export default function App() {
                         <Route path={ROUTES.register} element={<AuthenticationWrap />} />
                         <Route path={ROUTES.settings} element={<ContentWrap />} />
                         <Route path={`${ROUTES.classes}${ROUTES.debtors}`} element={<ContentWrap />} />
-                        <Route path={`${ROUTES.classes}${ROUTES.debtors}?Key=:id`} element={<ContentWrap />} />
-                        <Route path={`${ROUTES.documents}${ROUTES.debtor_contracts}?Key=:id`} element={<ContentWrap />} />
-                        <Route path={`${ROUTES.documents}${ROUTES.events}?Key=:id`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.classes}${ROUTES.debtors}/:id`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.classes}${ROUTES.debtor_contracts}/:id`} element={<ContentWrap />} />
+                        <Route path={`${ROUTES.documents}${ROUTES.events}/:id`} element={<ContentWrap />} />
                     </Route>
                     <Route path={ROUTES.notFound} element={<Error404 />} />
                 </Routes>

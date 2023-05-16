@@ -2,17 +2,16 @@ import React, {useCallback, useContext, useEffect, useState} from "react";
 import useRedirection from "../../hooks/useRedirection";
 import {API, ROUTES, SERVER_ERROR_MESSAGE} from "../../globalConstants";
 import {appContext} from "../../contexts";
-import {useLocation} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import useApi from "../../hooks/useApi";
 import useRedux from "../../hooks/useRedux";
-import {CARDS, MODAL_STATE} from "../../state-manager/stateConstants";
+import {CARDS, MODAL_STATE, REFRESH_FLAG} from "../../state-manager/stateConstants";
 import SearchHelpMessage from "./SearchHelpMessage";
-import useQuery from "../../hooks/useQuery";
 import {useSelector} from "react-redux";
 
 const HeaderLogo = () => {
     const location = useLocation()
-    const query = useQuery()
+    const id = useParams().id
     const redirect = useRedirection()
 
     const { theme, is_mobile_screen } = useContext(appContext)
@@ -21,8 +20,11 @@ const HeaderLogo = () => {
     const performApiCall = useApi()
     const updateModalInfo = useRedux(MODAL_STATE)
     const updateCards = useRedux(CARDS)
+    const updateRefreshFlag = useRedux(REFRESH_FLAG)
 
     const profileData = useSelector(state => state.profileData)
+    const refreshFlag = useSelector(state => state.refreshFlag)
+
     const getGreeting = useCallback(() => {
         const currentHours = new Date().getHours()
         let greeting
@@ -87,10 +89,12 @@ const HeaderLogo = () => {
     return (
         <div id="Header-logo" className="d-flex flex-row me-3 ms-2 flex-grow-1">
             <img className="logo-nav d-flex" src={`/pics/enplus_2005_${theme? 'dark' : 'light'}.svg`}
-                 onClick={ () => redirect(ROUTES.main) } alt="company logo"></img>
+                 onClick={ () => {
+                     updateRefreshFlag(!refreshFlag)
+                     redirect(ROUTES.main, false)
+                 } } alt="company logo"></img>
             {
-                [ROUTES.main, ROUTES.settings].includes(location.pathname) ||
-                query.get("Key") !== null?
+                [ROUTES.main, ROUTES.settings].includes(location.pathname) || id !== undefined?
                     <span className="d-flex me-auto ms-5 mt-auto mb-auto text-center">{ getGreeting() }</span>
                     :
                     <input type="text" placeholder=" &#xf002; Поиск"

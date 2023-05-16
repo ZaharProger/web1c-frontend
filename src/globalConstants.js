@@ -55,6 +55,12 @@ export const VALIDATION_CASES = {
     }
 }
 
+export const FULL_CARD_MODES = {
+    main: 'main',
+    related_events: 'events',
+    related_agreements: 'agreements'
+}
+
 export const API = {
     methods: {
         post: 'POST',
@@ -111,12 +117,12 @@ export const BUTTONS = {
             sub_items: []
         },
         {
-            caption: 'Договоры должника',
+            caption: 'Связанные события',
             route: null,
             sub_items: []
         },
         {
-            caption: 'Мероприятия должника',
+            caption: 'Связанные договоры',
             route: null,
             sub_items: []
         }
@@ -159,6 +165,11 @@ export const FIELDS = {
                 name: 'Должник',
                 type: FIELD_TYPES.text,
                 route: ROUTES.debtors
+            },
+            {
+                name: 'Дебиторская задолженность на отчетную дату',
+                type: FIELD_TYPES.label,
+                route: null
             },
             {
                 name: 'ИНН',
@@ -297,6 +308,11 @@ export const FIELDS = {
             {
                 name: 'Дата создания',
                 type: FIELD_TYPES.date,
+                route: null
+            },
+            {
+                name: 'Наименование',
+                type: FIELD_TYPES.text,
                 route: null
             },
             {

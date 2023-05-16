@@ -3,8 +3,8 @@ import React from "react";
 import useRedirection from "./useRedirection";
 import useApi from "./useApi";
 import useRedux from "./useRedux";
-import {API, BUTTONS, FIELDS, ROUTES, SERVER_ERROR_MESSAGE} from "../globalConstants";
-import {MODAL_STATE, SUBMENU_STATE} from "../state-manager/stateConstants";
+import {API, BUTTONS, FIELDS, FULL_CARD_MODES, ROUTES, SERVER_ERROR_MESSAGE} from "../globalConstants";
+import {FULL_CARD_MODE, MODAL_STATE, SUBMENU_STATE} from "../state-manager/stateConstants";
 import NavbarListItem from "../components/header/NavbarListItem";
 import SubMenuItem from "../components/header/SubMenuItem";
 import SettingsItem from "../components/content/settings/settingsItem";
@@ -18,9 +18,11 @@ export function useLayout(template) {
 
     const updateModalInfo = useRedux(MODAL_STATE)
     const updateSubMenuState = useRedux(SUBMENU_STATE)
+    const updateFullCardMode = useRedux(FULL_CARD_MODE)
 
     const mobileMenuState = useSelector(state => state.mobileMenuState)
-    const prevRoute = useSelector(state => state.prevRoute)
+    const hasRelatedEvents = useSelector(state => state.relatedEvents).length != 0
+    const hasRelatedAgreements = useSelector(state => state.relatedAgreements).length != 0
 
     const layoutItems = []
 
@@ -58,11 +60,28 @@ export function useLayout(template) {
             }} />)
         }
         else if (template === BUTTONS.full_card) {
-            const key = `Full-card-button_${i}`
-            const buttonClass = `${i == 1? 'clicked ' : ''}d-flex me-${i == template.length - 1? '0' : '5'}`
+            const callbacks = [
+                () => redirect(-1, false),
+                () => updateFullCardMode(FULL_CARD_MODES.main),
+                () => updateFullCardMode(FULL_CARD_MODES.related_events),
+                () => updateFullCardMode(FULL_CARD_MODES.related_agreements)
+            ]
 
-            layoutItems.push(<button key={ key } className={ buttonClass }
-                                   onClick={ () => redirect(prevRoute, false) }>{ template[i].caption }</button>)
+            const key = `Full-card-button_${i}`
+            const buttonClass = `d-flex me-${i == template.length - 1? '0' : '5'}`
+
+            let allowToRender = true
+            if (i == 2 || i == 3) {
+                allowToRender = (hasRelatedEvents && hasRelatedAgreements) ||
+                    (hasRelatedEvents && i == 2) ||
+                    (hasRelatedAgreements && i == 3)
+            }
+
+            if (allowToRender) {
+                layoutItems.push(<button key={ key } className={ buttonClass } onClick={
+                    () => callbacks[i]() }>{ template[i].caption
+                }</button>)
+            }
         }
         else if (template === FIELDS.settings) {
             layoutItems.push(
@@ -92,7 +111,7 @@ export function useLayout(template) {
             const { caption, route } = template[i]
             let callback = () => {
                 updateSubMenuState(-1)
-                redirect(route)
+                redirect(route, false)
             }
 
             layoutItems.push(<SubMenuItem key={ `Submenu-item_${i}` } item_data={{
