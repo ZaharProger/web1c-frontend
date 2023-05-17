@@ -10,7 +10,7 @@ export default function Footer() {
         <div id="Footer" className="d-flex mt-auto me-auto ms-auto flex-column p-1">
             <img className="logo-nav d-flex mb-3 mt-5" src={`/pics/enplus_2005_${isDarkTheme? 'dark' : 'light'}.svg`}
                  alt="company logo"></img>
-            <span className="d-flex align-items-center text-center mb-3">WEB-интерфейс для 1С систем <br /> 2023 </span>
+            <span className="d-flex align-items-center text-center mb-3">WEB-интерфейс АСУДЗ <br /> 2023 </span>
         </div>
     )
 }
