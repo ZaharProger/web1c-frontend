@@ -10,10 +10,10 @@ export default function MainPage(props) {
             {
                 cards.length != 0?
                     <>
-                        <p className="d-flex me-auto mt-2 ms-4 mb-1 text-center">
+                        <p role="heading" className="d-flex me-auto mt-2 ms-4 mb-1 text-center">
                             Просмотрено ранее
                         </p>
-                        <div className="history-list d-flex flex-row pe-2 ps-2 flex-wrap">
+                        <div role="listbox" className="history-list d-flex flex-row pe-2 ps-2 flex-wrap">
                             {
                                 cards
                             }
@@ -21,8 +21,8 @@ export default function MainPage(props) {
                     </>
                     :
                     <>
-                        <i className="fa-regular fa-location-question d-flex me-auto ms-auto mt-5"></i>
-                        <p className="d-flex me-auto ms-auto mt-2 text-center">
+                        <i role="heading" className="fa-regular fa-location-question d-flex me-auto ms-auto mt-5"></i>
+                        <p role="heading" className="d-flex me-auto ms-auto mt-2 text-center">
                             Ваша история просмотров пуста
                             <br />
                             Вы можете приступить к работе, воспользовавшись главным меню в верхней части сайта

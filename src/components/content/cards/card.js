@@ -35,7 +35,7 @@ export default function Card(props) {
 
     const fields = useLayout(template)
     return (
-        <div className="Card d-flex flex-column m-3"
+        <div role="listitem" className="Card d-flex flex-column m-3"
              onClick={ () => redirect(route) }>
             {
                 fields
